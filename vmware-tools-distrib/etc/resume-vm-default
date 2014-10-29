@@ -1,0 +1,120 @@
+***REMOVED***!/bin/sh
+***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***
+***REMOVED*** Copyright 2010-2013 VMware, Inc.  All rights reserved. -- VMware Confidential
+***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***
+
+***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***
+***REMOVED*** DO NOT modify this file directly as it will be overwritten the next
+***REMOVED*** time the VMware Tools are installed.
+***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***
+
+***REMOVED***
+***REMOVED*** statechange.sh
+***REMOVED***
+***REMOVED*** This script is a refactored version of the legacy power scripts (e.g.,
+***REMOVED*** poweron-vm-default).  It expects to be installed in their places --
+***REMOVED*** in other words, `basename "$0"` might be poweron-vm-default.
+***REMOVED***
+***REMOVED*** Handy reference/shorthand used in this doc/scripts:
+***REMOVED***    TOOLS_CONFDIR ::= Depends on platform and installation settings.  Likely
+***REMOVED***                      "/etc/vmware-tools" or
+***REMOVED***                      "/Library/Application Support/VMware Tools"
+***REMOVED***    powerOp       ::= One of "poweron-vm", "poweroff-vm", "suspend-vm", and
+***REMOVED***                      "resume-vm".
+***REMOVED***    vmwScriptDir  ::= $TOOLS_CONFDIR/scripts/vmware
+***REMOVED***    userScriptDir ::= $TOOLS_CONFDIR/scripts/${powerOp}-default.d
+***REMOVED***
+***REMOVED*** End users may install scripts of their own under $userScriptDir.  They
+***REMOVED*** are executed in alphabetical order with "$powerOp" as the only argument.
+***REMOVED***
+***REMOVED*** NB:  This directory layout remains to preserve backwards compatibility. End
+***REMOVED*** users are free to write a single script which uses its only parameter
+***REMOVED*** (${powerOp}) as a discriminator, and then install symlinks to it in each
+***REMOVED*** of the ${powerOp}-default.d directories.
+***REMOVED***
+***REMOVED*** On power-on and resume, VMware's scripts execute before the end user's.  On
+***REMOVED*** suspend and power-off, the end user's execute before VMware's.  (This way,
+***REMOVED*** VMware stops services only after the user's scripts have finished their
+***REMOVED*** work, and conversely restores the same services before the user's scripts
+***REMOVED*** attempt to use them.)
+***REMOVED***
+***REMOVED*** Should any script exit non-zero, only its value will be saved to exitCode.
+***REMOVED*** (Any further non-zero exits will have no effect on exitCode.)  This script
+***REMOVED*** exits with $exitCode.
+***REMOVED***
+***REMOVED*** XXX Consider using the available/enabled pattern for VMware's scripts.
+***REMOVED***
+***REMOVED*** XXX This should be staged as a single executable whereby the desired
+***REMOVED*** power operation is passed in as a parameter.  (I.e., one would run
+***REMOVED*** "/path/to/statechange.sh suspend-vm" rather than having to install
+***REMOVED*** statechange.sh as suspend-vm-default.)
+***REMOVED***
+
+echo `date` ": Executing '$0'"
+
+***REMOVED*** See above.
+TOOLS_CONFDIR=`dirname "$0"`
+export TOOLS_CONFDIR
+
+***REMOVED*** Pull in subroutines like Panic.
+. "$TOOLS_CONFDIR"/statechange.subr
+
+
+***REMOVED***
+***REMOVED*** RunScripts --
+***REMOVED***
+***REMOVED***    Executes scripts installed under $scriptDir.
+***REMOVED***
+***REMOVED*** Side effects:
+***REMOVED***    exitCode may be incremented.
+***REMOVED***
+
+RunScripts() {
+   scriptDir="$1"
+
+   if [ -d "$scriptDir" ]; then
+      for scriptFile in "$scriptDir"/*; do
+         if [ -x "$scriptFile" ]; then
+            "$scriptFile" $powerOp
+            exitCode=`expr $exitCode \| $?`
+         fi
+      done
+   fi
+}
+
+
+***REMOVED***
+***REMOVED*** main --
+***REMOVED***
+***REMOVED***    Entry point.  See comments at top of file for details.
+***REMOVED***
+***REMOVED*** Results:
+***REMOVED***    Exits with $exitCode.
+***REMOVED***
+
+main() {
+   ***REMOVED*** This is sanity checked in the case/esac bit below.
+   powerOp=`basename "$0" | sed 's,-default,,'`
+   exitCode=0
+
+   vmwScriptDir="$TOOLS_CONFDIR/scripts/vmware"
+   userScriptDir="$TOOLS_CONFDIR/scripts/${powerOp}-default.d"
+
+   case "$powerOp" in
+      poweron-vm|resume-vm)
+         RunScripts "$vmwScriptDir"
+         RunScripts "$userScriptDir"
+         ;;
+      poweroff-vm|suspend-vm)
+         RunScripts "$userScriptDir"
+         RunScripts "$vmwScriptDir"
+         ;;
+      *)
+         Panic "Invalid argument: $powerOp"
+         ;;
+   esac
+
+   return $exitCode
+}
+
+main
