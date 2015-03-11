@@ -812,7 +812,8 @@ sub restorecon {
   my $file = shift;
 
    if (is_selinux_enabled()) {
-     system("/sbin/restorecon " . $file);
+     ***REMOVED*** we suppress warnings from restorecon. bug ***REMOVED***1008386:
+     system("/sbin/restorecon 2>/dev/null " . $file);
      ***REMOVED*** Return a 1, restorecon was called.
      return 1;
    }
@@ -3250,7 +3251,7 @@ sub uninstall_dir {
 sub vmware_version {
   my $buildNr;
 
-  $buildNr = '8.6.14 build-1976090';
+  $buildNr = '8.6.15 build-2495133';
   return remove_whitespaces($buildNr);
 }
 
@@ -3959,7 +3960,7 @@ sub acevm_find_acetool  {
 
 ***REMOVED*** returns true if the included build player is newer
 sub acevm_included_player_newer {
-  return 1976090 gt int($gConfig->get('product.buildNumber', ''));
+  return 2495133 gt int($gConfig->get('product.buildNumber', ''));
 }
 
 ***REMOVED*** untar and install vmware-player.
@@ -5587,7 +5588,7 @@ sub install_content_vix {
   undef %patch;
   install_dir('./etc', $gRegistryDir, \%patch, 0x1);
 
-  if ('1976090' != 0) {
+  if ('2495133' != 0) {
     ***REMOVED*** suspend any '--default' option to force user interaction here.  The user
     ***REMOVED*** must answer the EULA question before continuing.
     my $tmp = $gOption{'default'};
@@ -7760,7 +7761,7 @@ sub main {
     $installed_version = get_installed_version();
     $installed_kind = get_installed_kind();
 
-    if (not (($installed_version eq '8.6.14') and
+    if (not (($installed_version eq '8.6.15') and
              ($installed_kind eq 'tar'))) {
       error('This ' . vmware_product_name()
             . ' Kernel Modules package is intended to be used in conjunction '

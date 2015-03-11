@@ -1307,7 +1307,8 @@ sub restorecon {
   my $file = shift;
 
    if (is_selinux_enabled()) {
-     system("/sbin/restorecon " . $file);
+     ***REMOVED*** we suppress warnings from restorecon. bug ***REMOVED***1008386:
+     system("/sbin/restorecon 2>/dev/null " . $file);
      ***REMOVED*** Return a 1, restorecon was called.
      return 1;
    }
@@ -3924,7 +3925,7 @@ sub uninstall_prefix {
 sub vmware_version {
   my $buildNr;
 
-  $buildNr = '8.6.14 build-1976090';
+  $buildNr = '8.6.15 build-2495133';
   return remove_whitespaces($buildNr);
 }
 
@@ -4984,8 +4985,6 @@ sub setup32or64Symlinks {
   ***REMOVED*** higher, and both it and the toolbox are run via wrapper scripts (like
   ***REMOVED*** Linux and Solaris, the vmware-user wrapper script is marked setuid).
   if (vmware_product() eq 'tools-for-linux') {
-     install_symlink($libbindir . '/vmware-user-wrapper',
-                     $bindir . '/vmware-user-wrapper');
      install_symlink($libbindir . '/vmware-user-suid-wrapper',
                      $bindir . '/vmware-user');
      install_symlink($libbindir . '/appLoader',
@@ -12785,9 +12784,9 @@ sub write_vmware_config {
   if ((vmware_product() eq 'ws') || (vmware_product() eq 'wgs')) {
     $config->set('product.version', '@@VERSIONNUMBER_FOR_VIX@@');
   } else {
-    $config->set('product.version', '8.6.14');
+    $config->set('product.version', '8.6.15');
   }
-  $config->set('product.buildNumber', '1976090');
+  $config->set('product.buildNumber', '2495133');
 
   if ((vmware_product() eq 'wgs') || (vmware_product() eq 'server')) {
       $config->set('authd.client.port', db_get_answer('AUTHDPORT'));
@@ -14652,7 +14651,7 @@ sub main {
    if (vmware_product() ne 'ws') {
       ***REMOVED*** For wgs, don't show the EULA for developers' builds.
       if (vmware_product() eq 'wgs') {
-        if ('1976090' != 0) {
+        if ('2495133' != 0) {
           show_EULA();
         }
       } else {
