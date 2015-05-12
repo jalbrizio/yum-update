@@ -30,9 +30,12 @@ yum -y update --nogpg > /var/log/yum-update.log
 ***REMOVED***
 ***REMOVED***
 
-***REMOVED*** ***REMOVED*** the server 
+***REMOVED*** Make sure iptables is running and will start at boot then ***REMOVED*** the server 
 ***REMOVED*** Yes, I chose ***REMOVED*** instead of shutdown -r 0
+***REMOVED*** 
 ***REMOVED***
+***REMOVED***
+
 ***REMOVED***
 
 else 
