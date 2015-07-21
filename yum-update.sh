@@ -38,7 +38,7 @@ yum -y update --nogpg > /var/log/yum-update.log
 ***REMOVED***
 
 ***REMOVED***
-mysql_upgrade -u root -pexamplePass         # replace with 'examplePass' instead
+***REMOVED***
 ***REMOVED***
 ***REMOVED***
 
