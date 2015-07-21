@@ -42,7 +42,9 @@ yum -y update --nogpg > /var/log/yum-update.log
 ***REMOVED***
 ***REMOVED***
 
-service mysql restart
+***REMOVED***
+***REMOVED***
+***REMOVED***
 
 ***REMOVED***
 
