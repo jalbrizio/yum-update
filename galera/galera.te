@@ -1,0 +1,33 @@
+
+module galera 1.0;
+
+require {
+	type kerberos_master_port_t;
+	type mysqld_safe_t;
+	type proc_net_t;
+	type rsync_exec_t;
+	type security_t;
+	type mysqld_t;
+	type anon_inodefs_t;
+	type apmd_var_run_t;
+	type port_t;
+	class process { siginh noatsecure setpgid rlimitinh };
+	class sock_file getattr;
+	class file { write getattr read open execute execute_no_trans };
+	class tcp_socket name_bind;
+}
+
+***REMOVED***============= mysqld_safe_t ==============
+allow mysqld_safe_t mysqld_t:process { siginh rlimitinh noatsecure };
+allow mysqld_safe_t security_t:file { read open };
+
+***REMOVED***============= mysqld_t ==============
+allow mysqld_t anon_inodefs_t:file { write getattr };
+allow mysqld_t apmd_var_run_t:sock_file getattr;
+allow mysqld_t kerberos_master_port_t:tcp_socket name_bind;
+
+***REMOVED***!!!! This avc can be allowed using the boolean 'allow_ypbind'
+allow mysqld_t port_t:tcp_socket name_bind;
+allow mysqld_t proc_net_t:file { read getattr open };
+allow mysqld_t rsync_exec_t:file { read getattr open execute execute_no_trans };
+allow mysqld_t self:process setpgid;
