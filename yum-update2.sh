@@ -10,12 +10,7 @@
 ***REMOVED***
 ***REMOVED***
 
-DAY=$(date "+%d")
-echo $DAY
 
-if [ "$DAY" -gt "8" -a "$DAY" -lt "14" ]
-
-then
 
 ***REMOVED*** This is where we call yum to update the server
 ***REMOVED***
@@ -48,9 +43,3 @@ yum -y update --nogpg > /var/log/yum-update.log
 
 ***REMOVED***
 
-else 
-
-echo "not running today"
-exit
-
-fi
