@@ -5,6 +5,7 @@
 WEEKDAY1=$(date "+%a"|grep Sun )
 WEEKDAY2=$(date "+%a"|grep Wed )
 DAY=$(date "+%d")
+ 
 
 if [ -n "$WEEKDAY1" ]
  then
