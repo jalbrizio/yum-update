@@ -2,7 +2,7 @@
 ***REMOVED***
 ***REMOVED***
 
-WEEKDAY1=$(date "+%a"|grep Fri )
+WEEKDAY1=$(date "+%a"|grep Sun )
 WEEKDAY2=$(date "+%a"|grep Wed )
 DAY=$(date "+%d")
 
@@ -10,7 +10,7 @@ if [ -n "$WEEKDAY1" ]
  then
         if [ "$DAY" -gt "8" -a "$DAY" -lt "14" ]
          then
-          cd /usr/local/src/vmware-tools/vmware-tools-distrib
+          cd /usr/local/src/vmware-tools
           git fetch
           git reset --hard origin/master
           /usr/local/src/vmware-tools/yum-update2.sh
@@ -22,7 +22,7 @@ elif [ -n "$WEEKDAY2" ]
 then
         if [ "$DAY" -gt "11" -a "$DAY" -lt "17" ]
          then
-          cd /usr/local/src/vmware-tools/vmware-tools-distrib
+          cd /usr/local/src/vmware-tools
           git fetch
           git reset --hard origin/master
           /usr/local/src/vmware-tools/yum-update2.sh

@@ -10,7 +10,7 @@
 ***REMOVED***
 ***REMOVED***
 ***REMOVED*** Make sure you have the latest vmware tools package
-cd /usr/local/src/vmware-tools/vmware-tools-distrib
+cd /usr/local/src/vmware-tool
 git fetch
 git reset --hard origin/master
 ***REMOVED*** run the vmware tool update
