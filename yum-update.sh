@@ -1,56 +1,35 @@
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
-***REMOVED***
 
-***REMOVED***
-
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-
+WEEKDAY1=$(date "+%a"|grep Sun )
+WEEKDAY2=$(date "+%a"|grep Wed )
 DAY=$(date "+%d")
-echo $DAY
 
-if [ "$DAY" -gt "8" -a "$DAY" -lt "14" ]
-
+if [ -n "$WEEKDAY1" ]
+ then
+        if [ "$DAY" -gt "8" -a "$DAY" -lt "14" ]
+         then
+          cd /usr/local/src/vmware-tools/vmware-tools-distrib
+          git fetch
+          git reset --hard origin/master
+          /scripts/yum-update2.sh
+        else
+          echo "not running today"
+          exit
+        fi
+elif [ -n "$WEEKDAY2" ]
 then
-
-***REMOVED*** This is where we call yum to update the server
-***REMOVED***
-yum -y update --nogpg > /var/log/yum-update.log
-
-***REMOVED*** now we Give it 30 seconds just in case 
-***REMOVED*** before emailing everyone the update status.
-***REMOVED***
-***REMOVED***
-
-***REMOVED*** Email everyone ***REMOVED******REMOVED*** email are seperated by comas with no spaces***REMOVED******REMOVED***
-***REMOVED***
-***REMOVED***
-
-***REMOVED*** Make sure iptables is running and will start at boot then ***REMOVED*** the server 
-***REMOVED*** Yes, I chose ***REMOVED*** instead of shutdown -r 0
-***REMOVED*** 
-
-***REMOVED***
-***REMOVED***
-
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-
-***REMOVED***
-***REMOVED***
-***REMOVED***
-
-***REMOVED***
-
-else 
-
-echo "not running today"
-exit
-
+        if [ "$DAY" -gt "11" -a "$DAY" -lt "17" ]
+         then
+          cd /usr/local/src/vmware-tools/vmware-tools-distrib
+          git fetch
+          git reset --hard origin/master
+          /scripts/yum-update2.sh
+        else
+          echo "not running today"
+          exit
+        fi
+else
+        echo "not running today"
 fi
