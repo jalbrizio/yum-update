@@ -2,7 +2,7 @@
 ***REMOVED***
 ***REMOVED***
 
-WEEKDAY1=$(date "+%a"|grep Sun )
+WEEKDAY1=$(date "+%a"|grep Fri )
 WEEKDAY2=$(date "+%a"|grep Wed )
 DAY=$(date "+%d")
 
@@ -13,7 +13,7 @@ if [ -n "$WEEKDAY1" ]
           cd /usr/local/src/vmware-tools/vmware-tools-distrib
           git fetch
           git reset --hard origin/master
-          /scripts/yum-update2.sh
+          /usr/local/src/vmware-tools/yum-update2.sh
         else
           echo "not running today"
           exit
@@ -25,7 +25,7 @@ then
           cd /usr/local/src/vmware-tools/vmware-tools-distrib
           git fetch
           git reset --hard origin/master
-          /scripts/yum-update2.sh
+          /usr/local/src/vmware-tools/yum-update2.sh
         else
           echo "not running today"
           exit
