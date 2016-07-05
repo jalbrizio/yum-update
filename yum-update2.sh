@@ -14,7 +14,7 @@
 
 ***REMOVED*** This is where we call yum to update the server
 ***REMOVED***
-yum -y update --nogpg > /var/log/yum-update.log
+***REMOVED***
 
 ***REMOVED*** now we Give it 30 seconds just in case 
 ***REMOVED*** before emailing everyone the update status.
