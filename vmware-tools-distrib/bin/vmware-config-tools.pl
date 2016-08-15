@@ -3925,7 +3925,7 @@ sub uninstall_prefix {
 sub vmware_version {
   my $buildNr;
 
-  $buildNr = '8.6.15 build-2495133';
+  $buildNr = '8.6.17 build-3814316';
   return remove_whitespaces($buildNr);
 }
 
@@ -6191,6 +6191,13 @@ sub configure_module_linux {
 				   $destName, $appLoaderArgs);
   }
 
+  ***REMOVED*** modconfig will create this dir, but we want it in the database:
+  ***REMOVED*** correct would be to add it in modconfig, but modconfig cannot add
+  ***REMOVED*** directories w/out additional changes.
+  if ( -d $libdir . '/symvers') {
+    db_add_dir($libdir . '/symvers')
+  }
+
   ***REMOVED*** Because our modules can now change names, we need to maintain some
   ***REMOVED*** variables that tell us our modules names and locations so we can
   ***REMOVED*** use them in our startup scripts.
@@ -7986,6 +7993,18 @@ sub path_compare {
   } else {
     return 'no';
   }
+}
+
+***REMOVED*** like readlink(), but return the filename
+***REMOVED*** when it's not actually a link:
+***REMOVED*** if file is a directory, make sure to pass it w/out trailing slash.
+sub linkdest {
+  my $file = shift;
+  my $dest = readlink($file);
+  if(defined $dest) {
+    return $dest;
+  }
+  return $file;
 }
 
 ***REMOVED*** check_link
@@ -12784,9 +12803,9 @@ sub write_vmware_config {
   if ((vmware_product() eq 'ws') || (vmware_product() eq 'wgs')) {
     $config->set('product.version', '@@VERSIONNUMBER_FOR_VIX@@');
   } else {
-    $config->set('product.version', '8.6.15');
+    $config->set('product.version', '8.6.17');
   }
-  $config->set('product.buildNumber', '2495133');
+  $config->set('product.buildNumber', '3814316');
 
   if ((vmware_product() eq 'wgs') || (vmware_product() eq 'server')) {
       $config->set('authd.client.port', db_get_answer('AUTHDPORT'));
@@ -13323,7 +13342,7 @@ sub configure_fonts_dot_conf {
    }
 
    my ($font_line, $sys_line);
-   my $font_path = db_get_answer('LIBDIR') . "/libconf/etc/fonts/fonts.conf";
+   my $font_path = linkdest(db_get_answer('LIBDIR') . '/libconf') . '/etc/fonts/fonts.conf';
    my $tmp_file = $tmp_dir . '/fonts.conf';
 
    open(MYFONT, "<" . $font_path)
@@ -13372,6 +13391,12 @@ sub configure_fonts_dot_conf {
    close(OUTFONT);
 
    system(shell_string($gHelper{'cp'}) . " " . $tmp_file . " " . $font_path);
+
+   ***REMOVED*** re-add file to database so they it will not stay behind on uninstall
+   ***REMOVED*** see bug ***REMOVED***745860
+   db_remove_file($font_path);
+   db_add_file($font_path, $cFlagTimestamp);
+
    remove_tmp_dir($tmp_dir);
 }
 
@@ -14651,7 +14676,7 @@ sub main {
    if (vmware_product() ne 'ws') {
       ***REMOVED*** For wgs, don't show the EULA for developers' builds.
       if (vmware_product() eq 'wgs') {
-        if ('2495133' != 0) {
+        if ('3814316' != 0) {
           show_EULA();
         }
       } else {

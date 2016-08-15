@@ -1,0 +1,1 @@
+./bin/vmware-uninstall-tools.pl

@@ -41,3 +41,4 @@ then
 else
         echo "not running today"
 fi
+yum clean all

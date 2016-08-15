@@ -3251,7 +3251,7 @@ sub uninstall_dir {
 sub vmware_version {
   my $buildNr;
 
-  $buildNr = '8.6.15 build-2495133';
+  $buildNr = '8.6.17 build-3814316';
   return remove_whitespaces($buildNr);
 }
 
@@ -3960,7 +3960,7 @@ sub acevm_find_acetool  {
 
 ***REMOVED*** returns true if the included build player is newer
 sub acevm_included_player_newer {
-  return 2495133 gt int($gConfig->get('product.buildNumber', ''));
+  return 3814316 gt int($gConfig->get('product.buildNumber', ''));
 }
 
 ***REMOVED*** untar and install vmware-player.
@@ -4418,6 +4418,10 @@ sub install_content_tools {
   my $filePath = $gRegistryDir . '/vmware-user.desktop';
   %patch = ('Exec=.*$' => $execStr);
   internal_sed ('./etc/vmware-user.desktop', $filePath, 0, \%patch);
+
+  ***REMOVED*** re-add file to database so they it will not stay behind on uninstall
+  ***REMOVED*** see bug ***REMOVED***745860
+  db_add_file($filePath, 0x1);
 }
 
 sub uninstall_content_legacy_tools {
@@ -5588,7 +5592,7 @@ sub install_content_vix {
   undef %patch;
   install_dir('./etc', $gRegistryDir, \%patch, 0x1);
 
-  if ('2495133' != 0) {
+  if ('3814316' != 0) {
     ***REMOVED*** suspend any '--default' option to force user interaction here.  The user
     ***REMOVED*** must answer the EULA question before continuing.
     my $tmp = $gOption{'default'};
@@ -6639,7 +6643,7 @@ sub create_initial_database {
   print wrap('Creating a new ' . vmware_product_name()
              . ' installer database using the tar4 format.' . "\n\n", 0);
 
-  $made_dir1 = create_dir($gRegistryDir, 0);
+  $made_dir1 = not create_dir($gRegistryDir, 0);
   safe_chmod(0755, $gRegistryDir);
 
   if (not open(INSTALLDB, '>' . $gInstallerMainDB)) {
@@ -7761,7 +7765,7 @@ sub main {
     $installed_version = get_installed_version();
     $installed_kind = get_installed_kind();
 
-    if (not (($installed_version eq '8.6.15') and
+    if (not (($installed_version eq '8.6.17') and
              ($installed_kind eq 'tar'))) {
       error('This ' . vmware_product_name()
             . ' Kernel Modules package is intended to be used in conjunction '
