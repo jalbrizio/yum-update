@@ -308,7 +308,7 @@ if(x.t("drivers"))y.f("1,1,3,1433");
 if(x.t("automatic"))y.f("3,1");
 if(x.t("disk"))y.f("13,246,5,1,7,1");
 if(x.t("occurs"))y.f("10,1,7,2");
-if(x.t("***REMOVED***"))y.f("7,1");
+if(x.t("reboot"))y.f("7,1");
 if(x.t("red"))y.f("8,1");
 if(x.t("know"))y.f("9,1");
 if(x.t("next"))y.f("12,1,10,1");

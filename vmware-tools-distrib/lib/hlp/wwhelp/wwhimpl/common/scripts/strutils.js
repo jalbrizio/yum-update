@@ -15,9 +15,9 @@ function  WWHStringUtilities_GetBaseURL(ParamURL)
     Parts = BaseURL.split("?");
     BaseURL = Parts[0];
   }
-  else if (BaseURL.indexOf("***REMOVED***") != -1) 
+  else if (BaseURL.indexOf("#") != -1) 
   {
-    Parts = BaseURL.split("***REMOVED***");
+    Parts = BaseURL.split("#");
     BaseURL = Parts[0];
   }
 
@@ -147,9 +147,9 @@ function  WWHStringUtilities_UnescapeHTML(ParamHTML)
 
   // If any still exist, replace them with normal character
   //
-  if (Text.indexOf("&***REMOVED***") != -1)
+  if (Text.indexOf("&#") != -1)
   {
-    EscapedExpression = new RegExp("&***REMOVED***([0-9]+);");
+    EscapedExpression = new RegExp("&#([0-9]+);");
     EscapedCharacterMatches = EscapedExpression.exec(Text)
     while (EscapedCharacterMatches != null)
     {
@@ -244,7 +244,7 @@ function  WWHStringUtilities_GetURLFilePathOnly(ParamURL)
 
   // Trim off named anchor
   //
-  VarIndex = VarFilePathOnly.indexOf("***REMOVED***");
+  VarIndex = VarFilePathOnly.indexOf("#");
   if (VarIndex != -1)
   {
     VarFilePathOnly = VarFilePathOnly.substring(0, VarIndex);

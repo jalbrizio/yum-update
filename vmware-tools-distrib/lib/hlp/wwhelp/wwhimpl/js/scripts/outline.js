@@ -449,7 +449,7 @@ function  WWHOutline_DisplayDoc(ParamEntryID)
     {
       // Determine link file index and anchor
       //
-      Parts = Entry.mURL.split("***REMOVED***");
+      Parts = Entry.mURL.split("#");
       LinkFileIndex = parseInt(Parts[0]);
       LinkAnchor = null;
       if (Parts.length > 1)
@@ -586,9 +586,9 @@ function  WWHOutline_Sync(ParamBookIndex,
           {
             // Trim of any trailing anchor information, if specified
             //
-            if (Iterator.mEntry.mURL.indexOf("***REMOVED***") != -1)
+            if (Iterator.mEntry.mURL.indexOf("#") != -1)
             {
-              CandidateEntry = Iterator.mEntry.mURL.substring(0, Iterator.mEntry.mURL.indexOf("***REMOVED***"));
+              CandidateEntry = Iterator.mEntry.mURL.substring(0, Iterator.mEntry.mURL.indexOf("#"));
             }
             else
             {

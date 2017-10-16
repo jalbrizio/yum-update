@@ -216,7 +216,7 @@ function  WWHBookList_HREFToBookIndexFileIndexAnchor(ParamHREF)
 
   // Record anchor
   //
-  Parts = ParamHREF.split("***REMOVED***");
+  Parts = ParamHREF.split("#");
   TrimmedHREF = Parts[0];
   Anchor = "";
   if (Parts.length > 1)

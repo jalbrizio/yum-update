@@ -1,17 +1,17 @@
-***REMOVED***!/bin/sh
-***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***
-***REMOVED*** Copyright 2001-2013 VMware, Inc.  All rights reserved.
-***REMOVED*** VMware Confidential
-***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***
+#!/bin/sh
+##########################################################################
+# Copyright 2001-2013 VMware, Inc.  All rights reserved.
+# VMware Confidential
+##########################################################################
 
 
-***REMOVED***
-***REMOVED*** network (Linux)
-***REMOVED***
-***REMOVED*** Using a combination of a system networking script, ifconfig, and ifup,
-***REMOVED*** attempt to release and renew DHCP leases upon receipt of suspend and resume
-***REMOVED*** events, respectively.
-***REMOVED***
+#
+# network (Linux)
+#
+# Using a combination of a system networking script, ifconfig, and ifup,
+# attempt to release and renew DHCP leases upon receipt of suspend and resume
+# events, respectively.
+#
 
 
 echo `date` ": Executing '$0'"
@@ -20,18 +20,18 @@ echo
 . `dirname "$0"`/../../statechange.subr
 
 
-***REMOVED***
-***REMOVED*** find_networking_script --
-***REMOVED***
-***REMOVED***    Searches common Linux distro init/rc paths to find a singular network
-***REMOVED***    services script.
-***REMOVED***
-***REMOVED*** Result:
-***REMOVED***    Returns a valid networking script path on success or "error" on failure.
-***REMOVED***
-***REMOVED*** Side effects:
-***REMOVED***    None.
-***REMOVED***
+#
+# find_networking_script --
+#
+#    Searches common Linux distro init/rc paths to find a singular network
+#    services script.
+#
+# Result:
+#    Returns a valid networking script path on success or "error" on failure.
+#
+# Side effects:
+#    None.
+#
 
 find_networking_script() {
     local script="error"
@@ -44,7 +44,7 @@ find_networking_script() {
 	    [ -d "$dir/rc5.d" ] &&
 	    [ -d "$dir/rc6.d" ]; then
 
-	    ***REMOVED*** Now find the appropriate networking script.
+	    # Now find the appropriate networking script.
 	    if [ -d "$dir/init.d" ]; then
 		if [ -x "$dir/init.d/network" ]; then
 		    script="$dir/init.d/network"
@@ -65,20 +65,20 @@ find_networking_script() {
 }
 
 
-***REMOVED***
-***REMOVED*** save_active_NIC_list --
-***REMOVED***
-***REMOVED***    Records a list of every active NIC to /var/run/vmware-active-nics.
-***REMOVED***
-***REMOVED***    XXX What's the story on aliases?  Should they still be included, or will
-***REMOVED***    they be recreated automatically upon resume?
-***REMOVED***
-***REMOVED*** Results:
-***REMOVED***    $activeList has, one per line, a list of all active NICs.
-***REMOVED***
-***REMOVED*** Side effects:
-***REMOVED***    None.
-***REMOVED***
+#
+# save_active_NIC_list --
+#
+#    Records a list of every active NIC to /var/run/vmware-active-nics.
+#
+#    XXX What's the story on aliases?  Should they still be included, or will
+#    they be recreated automatically upon resume?
+#
+# Results:
+#    $activeList has, one per line, a list of all active NICs.
+#
+# Side effects:
+#    None.
+#
 
 save_active_NIC_list() {
    >$activeList
@@ -90,15 +90,15 @@ save_active_NIC_list() {
 }
 
 
-***REMOVED***
-***REMOVED*** rescue_NIC --
-***REMOVED***
-***REMOVED***    For each NIC recorded in $activeList that is not currently "up", run
-***REMOVED***    "ifup $nic".
-***REMOVED***
-***REMOVED*** Results:
-***REMOVED***    All downed NICs should be active.
-***REMOVED***
+#
+# rescue_NIC --
+#
+#    For each NIC recorded in $activeList that is not currently "up", run
+#    "ifup $nic".
+#
+# Results:
+#    All downed NICs should be active.
+#
 
 rescue_NIC() {
    if [ -f "$activeList" ]; then
@@ -118,29 +118,29 @@ rescue_NIC() {
 }
 
 
-***REMOVED***
-***REMOVED*** TranquilizeNetworkManager --
-***REMOVED***
-***REMOVED***    Put the NetworkManager daemon to sleep (maybe).
-***REMOVED***
-***REMOVED***    See http://projects.gnome.org/NetworkManager/developers/spec.html .
-***REMOVED***
-***REMOVED*** Results:
-***REMOVED***    Sleep(true) request is sent to the NetworkManager D-Bus interface.
-***REMOVED***
-***REMOVED*** Side effects:
-***REMOVED***    None.
-***REMOVED***
+#
+# TranquilizeNetworkManager --
+#
+#    Put the NetworkManager daemon to sleep (maybe).
+#
+#    See http://projects.gnome.org/NetworkManager/developers/spec.html .
+#
+# Results:
+#    Sleep(true) request is sent to the NetworkManager D-Bus interface.
+#
+# Side effects:
+#    None.
+#
 
 TranquilizeNetworkManager() {
-   ***REMOVED*** `which' may be a bit noisy, so we'll shush it.
+   # `which' may be a bit noisy, so we'll shush it.
    dbusSend=`which dbus-send 2>/dev/null`
    if [ $? -eq 0 ]; then
-      ***REMOVED*** NetworkManager 0.6
+      # NetworkManager 0.6
       $dbusSend --system --dest=org.freedesktop.NetworkManager          \
          /org/freedesktop/NetworkManager                                \
          org.freedesktop.NetworkManager.sleep
-      ***REMOVED*** NetworkManager 0.7.0
+      # NetworkManager 0.7.0
       $dbusSend --system --dest=org.freedesktop.NetworkManager          \
          /org/freedesktop/NetworkManager                                \
          org.freedesktop.NetworkManager.Sleep boolean:true
@@ -148,29 +148,29 @@ TranquilizeNetworkManager() {
 }
 
 
-***REMOVED***
-***REMOVED*** WakeNetworkManager --
-***REMOVED***
-***REMOVED***    Wake the NetworkManager daemon (maybe).
-***REMOVED***
-***REMOVED***    See http://projects.gnome.org/NetworkManager/developers/spec.html .
-***REMOVED***
-***REMOVED*** Results:
-***REMOVED***    Sleep(false)request is sent to the NetworkManager D-Bus interface.
-***REMOVED***
-***REMOVED*** Side effects:
-***REMOVED***    None.
-***REMOVED***
+#
+# WakeNetworkManager --
+#
+#    Wake the NetworkManager daemon (maybe).
+#
+#    See http://projects.gnome.org/NetworkManager/developers/spec.html .
+#
+# Results:
+#    Sleep(false)request is sent to the NetworkManager D-Bus interface.
+#
+# Side effects:
+#    None.
+#
 
 WakeNetworkManager() {
-   ***REMOVED*** `which' may be a bit noisy, so we'll shush it.
+   # `which' may be a bit noisy, so we'll shush it.
    dbusSend=`which dbus-send 2>/dev/null`
    if [ $? -eq 0 ]; then
-      ***REMOVED*** NetworkManager 0.6
+      # NetworkManager 0.6
       $dbusSend --system --dest=org.freedesktop.NetworkManager          \
          /org/freedesktop/NetworkManager                                \
          org.freedesktop.NetworkManager.wake
-      ***REMOVED*** NetworkManager 0.7.0
+      # NetworkManager 0.7.0
       $dbusSend --system --dest=org.freedesktop.NetworkManager          \
          /org/freedesktop/NetworkManager                                \
          org.freedesktop.NetworkManager.Sleep boolean:false
@@ -178,15 +178,15 @@ WakeNetworkManager() {
 }
 
 
-***REMOVED***
-***REMOVED*** main --
-***REMOVED***
-***REMOVED***    Main entry point.  Perform some sanity checking, then map state change
-***REMOVED***    events to relevant networking operations.
-***REMOVED***
-***REMOVED*** Results:
-***REMOVED***    See comment at top of file.
-***REMOVED***
+#
+# main --
+#
+#    Main entry point.  Perform some sanity checking, then map state change
+#    events to relevant networking operations.
+#
+# Results:
+#    See comment at top of file.
+#
 
 main() {
    exitCode=0
@@ -195,8 +195,8 @@ main() {
    networkScript=`find_networking_script`
    [ "$networkScript" != "error" ] || Panic "Cannot find system networking script."
 
-   ***REMOVED*** XXX Are these really necessary?  If so, we should have seen customer
-   ***REMOVED*** complaints by now.
+   # XXX Are these really necessary?  If so, we should have seen customer
+   # complaints by now.
    which ifup >/dev/null 2>&1      || Panic "ifup not in search path."
    which ifconfig >/dev/null 2>&1  || Panic "ifconfig not in search path."
 
@@ -210,24 +210,24 @@ main() {
          TranquilizeNetworkManager
          ;;
       resume-vm)
-         ***REMOVED*** According to hfu, "/etc/init.d/networking restart" on Debian 5.0
-         ***REMOVED*** may bring down ethernet interfaces tagged as "allow-hotplug" without
-         ***REMOVED*** bringing them back up.
-         ***REMOVED***
-         ***REMOVED*** This is especially a problem when reverting to a live, running
-         ***REMOVED*** VM snapshot where an active NIC list hadn't yet been generated,
-         ***REMOVED*** resulting in sudden loss of an otherwise operational NIC.
-         ***REMOVED***
-         ***REMOVED*** So, if the active list doesn't exist, assume we're coming back to
-         ***REMOVED*** a live snapshot and capture the current active list now for
-         ***REMOVED*** rescue later.
+         # According to hfu, "/etc/init.d/networking restart" on Debian 5.0
+         # may bring down ethernet interfaces tagged as "allow-hotplug" without
+         # bringing them back up.
+         #
+         # This is especially a problem when reverting to a live, running
+         # VM snapshot where an active NIC list hadn't yet been generated,
+         # resulting in sudden loss of an otherwise operational NIC.
+         #
+         # So, if the active list doesn't exist, assume we're coming back to
+         # a live snapshot and capture the current active list now for
+         # rescue later.
          if [ ! -s $activeList ]; then
             save_active_NIC_list
          fi
          WakeNetworkManager
-         ***REMOVED*** XXX Do we really want restart or is start sufficient?  Like, would
-         ***REMOVED*** using start avoid the problem mentioned above?
-         ***REMOVED*** -- PR 816791, 876145
+         # XXX Do we really want restart or is start sufficient?  Like, would
+         # using start avoid the problem mentioned above?
+         # -- PR 816791, 876145
          "$networkScript" start
          rescue_NIC
          ;;

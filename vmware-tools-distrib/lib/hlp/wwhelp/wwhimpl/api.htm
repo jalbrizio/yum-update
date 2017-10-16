@@ -25,10 +25,10 @@
         Parts = location.href.split("?");
         Parameters = "?" + Parts[1];
       }
-      else if (location.href.indexOf("***REMOVED***") != -1)
+      else if (location.href.indexOf("#") != -1)
       {
-        Parts = location.href.split("***REMOVED***");
-        Parameters = "***REMOVED***" + Parts.slice(1).join("***REMOVED***");
+        Parts = location.href.split("#");
+        Parameters = "#" + Parts.slice(1).join("#");
       }
 
       // Sanitize parameters

@@ -1,7 +1,0 @@
-UtsRelease 2.6.18-6-amd64
-UtsVersion ***REMOVED***1 SMP Tue Aug 19 04:30:56 UTC 2008
-UtsMachine x86_64
-ModVersion yes
-SMP yes
-PageOffset FFFF810000000000
-Comment Debian4.0r3, 2.6.18-6-amd64, amd64

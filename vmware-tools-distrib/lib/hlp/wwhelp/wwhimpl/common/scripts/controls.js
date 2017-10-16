@@ -805,7 +805,7 @@ function  WWHControls_RelatedTopics()
       VarDocumentURL = WWHFrame.WWHBrowser.fNormalizeURL(VarDocumentFrame.location.href);
       VarDocumentURL = WWHStringUtilities_GetURLFilePathOnly(VarDocumentURL);
 
-      WWHFrame.WWHHelp.fSetLocation("WWHDocumentFrame", VarDocumentURL + "***REMOVED***WWHRelatedTopics");
+      WWHFrame.WWHHelp.fSetLocation("WWHDocumentFrame", VarDocumentURL + "#WWHRelatedTopics");
     }
   }
 }

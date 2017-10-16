@@ -479,7 +479,7 @@ SECTION 2: GNU General Public License, V2.0
    >>> include/linux/random.h-2.6.18
    >>> include/linux/rbtree.h-2.6.18
    >>> include/linux/rcupdate.h-2.6.18
-   >>> include/linux/***REMOVED***.h-2.6.18
+   >>> include/linux/reboot.h-2.6.18
    >>> include/linux/relay.h-2.6.18
    >>> include/linux/resource.h-2.6.18
    >>> include/linux/route.h-2.6.18
@@ -3012,7 +3012,7 @@ License: GPL 2.0
 
 Copyright 2004 James Cleverdon, IBM.
 
-(c) 1995 Alan Cox, Building ***REMOVED***3 <alan@redhat.com>
+(c) 1995 Alan Cox, Building #3 <alan@redhat.com>
 
 (c) 1998-99, 2000 Ingo Molnar <mingo@redhat.com>
 
@@ -4839,7 +4839,7 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 
 
->>> include/linux/***REMOVED***.h-2.6.18
+>>> include/linux/reboot.h-2.6.18
 
 License: GPL 2.0
 
@@ -4916,7 +4916,7 @@ the Free Software Foundation; either version 2 of the License, or
 (at your option) any later version.
 
 Due to this file being licensed under the GPL there is controversy over
-whether this permits you to write a module that ***REMOVED***includes this file
+whether this permits you to write a module that #includes this file
 without placing your module under the GPL.  Please consult a lawyer for
 advice before doing this.
 
@@ -13921,7 +13921,7 @@ ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 >>> gotourl function by stuart patterson-none
 
-"GotoURL Using ShellExecute()" function by Stuart Patterson, August 1997, Windows Developer's Journal  (***REMOVED***246085)
+"GotoURL Using ShellExecute()" function by Stuart Patterson, August 1997, Windows Developer's Journal  (#246085)
 
 ------------------------------------------------
 Windows Developer's Journal Code Archive
@@ -14715,7 +14715,7 @@ zlib.h -- interface of the 'zlib' general purpose compression library
 
 >GNU C runtime (libc)
 
-see http://www.gnu.org/software/libc/manual/html_node/Copying.html***REMOVED***Copying
+see http://www.gnu.org/software/libc/manual/html_node/Copying.html#Copying
 
 >OpenSSL
 

@@ -8,38 +8,38 @@
  *    VMCI sockets public constants and types.
  */
 
-***REMOVED***ifndef _VMCI_SOCKETS_H_
-***REMOVED***define _VMCI_SOCKETS_H_
+#ifndef _VMCI_SOCKETS_H_
+#define _VMCI_SOCKETS_H_
 
 
-***REMOVED***if defined(_WIN32)
-***REMOVED***  if !defined(NT_INCLUDED)
-***REMOVED***     include <winsock2.h>
-***REMOVED***  endif // !NT_INCLUDED
-***REMOVED***else // _WIN32
-***REMOVED***if defined(linux) && !defined(VMKERNEL)
-***REMOVED***  if !defined(__KERNEL__)
-***REMOVED***    include <sys/socket.h>
-***REMOVED***  endif // __KERNEL__
-***REMOVED***else // linux && !VMKERNEL
-***REMOVED***  if defined(__APPLE__)
-***REMOVED***    include <sys/socket.h>
-***REMOVED***    include <string.h>
-***REMOVED***  endif // __APPLE__
-***REMOVED***endif // linux && !VMKERNEL
-***REMOVED***endif
+#if defined(_WIN32)
+#  if !defined(NT_INCLUDED)
+#     include <winsock2.h>
+#  endif // !NT_INCLUDED
+#else // _WIN32
+#if defined(linux) && !defined(VMKERNEL)
+#  if !defined(__KERNEL__)
+#    include <sys/socket.h>
+#  endif // __KERNEL__
+#else // linux && !VMKERNEL
+#  if defined(__APPLE__)
+#    include <sys/socket.h>
+#    include <string.h>
+#  endif // __APPLE__
+#endif // linux && !VMKERNEL
+#endif
 
 /*
  * We use the same value for the AF family and the socket option
  * level. To set options, use the value of VMCISock_GetAFValue for
  * 'level' and these constants for the optname.
  */
-***REMOVED***define SO_VMCI_BUFFER_SIZE                 0
-***REMOVED***define SO_VMCI_BUFFER_MIN_SIZE             1
-***REMOVED***define SO_VMCI_BUFFER_MAX_SIZE             2
-***REMOVED***define SO_VMCI_PEER_HOST_VM_ID             3
-***REMOVED***define SO_VMCI_SERVICE_LABEL               4
-***REMOVED***define SO_VMCI_TRUSTED                     5
+#define SO_VMCI_BUFFER_SIZE                 0
+#define SO_VMCI_BUFFER_MIN_SIZE             1
+#define SO_VMCI_BUFFER_MAX_SIZE             2
+#define SO_VMCI_PEER_HOST_VM_ID             3
+#define SO_VMCI_SERVICE_LABEL               4
+#define SO_VMCI_TRUSTED                     5
 
 /*
  * The VMCI sockets address equivalents of INADDR_ANY.  The first works for
@@ -47,20 +47,20 @@
  * the current guest (or the host, if running outside a guest), while the
  * second indicates any available port.
  */
-***REMOVED***define VMADDR_CID_ANY  ((unsigned int) -1)
-***REMOVED***define VMADDR_PORT_ANY ((unsigned int) -1)
+#define VMADDR_CID_ANY  ((unsigned int) -1)
+#define VMADDR_PORT_ANY ((unsigned int) -1)
 
 
-***REMOVED***if defined(_WIN32) || defined(VMKERNEL)
+#if defined(_WIN32) || defined(VMKERNEL)
    typedef unsigned short sa_family_t;
-***REMOVED***endif // _WIN32
+#endif // _WIN32
 
-***REMOVED***if defined(VMKERNEL)
+#if defined(VMKERNEL)
    struct sockaddr {
       sa_family_t sa_family;
       char sa_data[14];
    };
-***REMOVED***endif
+#endif
 
 /*
  * Address structure for VSockets VMCI sockets. The address family should be
@@ -69,17 +69,17 @@
  */
 
 struct sockaddr_vm {
-***REMOVED***if defined(__APPLE__)
+#if defined(__APPLE__)
    unsigned char svm_len;                           // Mac OS has the length first.
-***REMOVED***endif // __APPLE__
+#endif // __APPLE__
    sa_family_t svm_family;                          // AF_VMCI.
    unsigned short svm_reserved1;                    // Reserved.
    unsigned int svm_port;                           // Port.
    unsigned int svm_cid;                            // Context id.
    unsigned char svm_zero[sizeof(struct sockaddr) - // Same size as sockaddr.
-***REMOVED***if defined(__APPLE__)
+#if defined(__APPLE__)
                              sizeof(unsigned char) -
-***REMOVED***endif // __APPLE__
+#endif // __APPLE__
                              sizeof(sa_family_t) -
                              sizeof(unsigned short) -
                              sizeof(unsigned int) -
@@ -87,12 +87,12 @@ struct sockaddr_vm {
 };
 
 
-***REMOVED***if defined(_WIN32)
-***REMOVED***  if !defined(NT_INCLUDED)
-***REMOVED***     include <winioctl.h>
-***REMOVED***     define VMCI_SOCKETS_DEVICE          L"\\\\.\\VMCI"
-***REMOVED***     define VMCI_SOCKETS_GET_AF_VALUE    0x81032068
-***REMOVED***     define VMCI_SOCKETS_GET_LOCAL_CID   0x8103206c
+#if defined(_WIN32)
+#  if !defined(NT_INCLUDED)
+#     include <winioctl.h>
+#     define VMCI_SOCKETS_DEVICE          L"\\\\.\\VMCI"
+#     define VMCI_SOCKETS_GET_AF_VALUE    0x81032068
+#     define VMCI_SOCKETS_GET_LOCAL_CID   0x8103206c
       static __inline int VMCISock_GetAFValue(void)
       {
          int afvalue = -1;
@@ -124,36 +124,36 @@ struct sockaddr_vm {
          }
          return cid;
       }
-***REMOVED***  endif // !NT_INCLUDED
-***REMOVED***else // _WIN32
-***REMOVED***if (defined(linux) && !defined(VMKERNEL)) || (defined(__APPLE__))
-***REMOVED***  if defined(linux) && defined(__KERNEL__)
+#  endif // !NT_INCLUDED
+#else // _WIN32
+#if (defined(linux) && !defined(VMKERNEL)) || (defined(__APPLE__))
+#  if defined(linux) && defined(__KERNEL__)
    void VMCISock_KernelRegister(void);
    void VMCISock_KernelDeregister(void);
    int VMCISock_GetAFValue(void);
    int VMCISock_GetLocalCID(void);
-***REMOVED***  elif defined(__APPLE__) && (KERNEL)
+#  elif defined(__APPLE__) && (KERNEL)
    /* Nothing to define here. */
-***REMOVED***  else // __KERNEL__
-***REMOVED***  include <sys/types.h>
-***REMOVED***  include <sys/stat.h>
-***REMOVED***  include <fcntl.h>
-***REMOVED***  include <sys/ioctl.h>
-***REMOVED***  include <unistd.h>
+#  else // __KERNEL__
+#  include <sys/types.h>
+#  include <sys/stat.h>
+#  include <fcntl.h>
+#  include <sys/ioctl.h>
+#  include <unistd.h>
 
-***REMOVED***  include <stdio.h>
+#  include <stdio.h>
 
-***REMOVED***  define VMCI_SOCKETS_DEFAULT_DEVICE      "/dev/vsock"
-***REMOVED***  define VMCI_SOCKETS_CLASSIC_ESX_DEVICE  "/vmfs/devices/char/vsock/vsock"
+#  define VMCI_SOCKETS_DEFAULT_DEVICE      "/dev/vsock"
+#  define VMCI_SOCKETS_CLASSIC_ESX_DEVICE  "/vmfs/devices/char/vsock/vsock"
 
-***REMOVED*** if defined(linux)
-***REMOVED***  define VMCI_SOCKETS_GET_AF_VALUE  1976
-***REMOVED***  define VMCI_SOCKETS_GET_LOCAL_CID 1977
-***REMOVED*** elif defined(__APPLE__)
-***REMOVED***  include <sys/ioccom.h>
-***REMOVED***  define VMCI_SOCKETS_GET_AF_VALUE  _IOR('V', 25 , int)
-***REMOVED***  define VMCI_SOCKETS_GET_LOCAL_CID _IOR('V', 26 , unsigned)
-***REMOVED***endif
+# if defined(linux)
+#  define VMCI_SOCKETS_GET_AF_VALUE  1976
+#  define VMCI_SOCKETS_GET_LOCAL_CID 1977
+# elif defined(__APPLE__)
+#  include <sys/ioccom.h>
+#  define VMCI_SOCKETS_GET_AF_VALUE  _IOR('V', 25 , int)
+#  define VMCI_SOCKETS_GET_LOCAL_CID _IOR('V', 26 , unsigned)
+#endif
 
    /*
     *----------------------------------------------------------------------------
@@ -246,10 +246,10 @@ struct sockaddr_vm {
       close(fd);
       return contextId;
    }
-***REMOVED***  endif // __KERNEL__
-***REMOVED***endif // linux && !VMKERNEL
-***REMOVED***endif // _WIN32
+#  endif // __KERNEL__
+#endif // linux && !VMKERNEL
+#endif // _WIN32
 
 
-***REMOVED***endif // _VMCI_SOCKETS_H_
+#endif // _VMCI_SOCKETS_H_
 

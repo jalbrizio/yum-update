@@ -314,10 +314,10 @@ function  WWHHelp_GetURLParameters(ParamURL)
     {
       Parts = ParamURL.split("?");
     }
-    else if (ParamURL.indexOf("***REMOVED***") != -1)
+    else if (ParamURL.indexOf("#") != -1)
     {
-      Parts = ParamURL.split("***REMOVED***");
-      Parameters = Parts.slice(1).join("***REMOVED***");
+      Parts = ParamURL.split("#");
+      Parameters = Parts.slice(1).join("#");
       Parts.length = 2;
       Parts[1] = Parameters;
     }
@@ -575,9 +575,9 @@ function  WWHHelp_SetDocumentFrameWithURL(ParamURL)
     VarParts = this.mLocationURL.split("?");
     VarLocationURLNoParams = VarParts[0];
   }
-  else if (this.mLocationURL.indexOf("***REMOVED***") != -1)
+  else if (this.mLocationURL.indexOf("#") != -1)
   {
-    VarParts = this.mLocationURL.split("***REMOVED***");
+    VarParts = this.mLocationURL.split("#");
     VarLocationURLNoParams = VarParts[0];
   }
   if (VarLocationURLNoParams.length == 0)
@@ -597,15 +597,15 @@ function  WWHHelp_SetDocumentFrameWithURL(ParamURL)
       VarURLParameters = VarParts[1];
     }
   }
-  else if (ParamURL.indexOf("***REMOVED***") != -1)
+  else if (ParamURL.indexOf("#") != -1)
   {
-    VarParts = ParamURL.split("***REMOVED***");
+    VarParts = ParamURL.split("#");
     if ((VarParts.length > 1) &&
         (VarParts[1].length > 0))
     {
       // Ensure trailing anchor hashes are preserved
       //
-      VarURLParameters = VarParts.slice(1).join("***REMOVED***");
+      VarURLParameters = VarParts.slice(1).join("#");
     }
   }
 
@@ -696,7 +696,7 @@ function  WWHHelp_GetBookIndexFileIndexURL(ParamBookIndex,
         (ParamAnchor != null) &&
         (ParamAnchor.length > 0))
     {
-      URL += "***REMOVED***" + ParamAnchor;
+      URL += "#" + ParamAnchor;
     }
   }
 
@@ -806,9 +806,9 @@ function  WWHHelp_GetURLPrefix(ParamURL)
     Parts = WorkingURL.split("?");
     WorkingURL = Parts[0];
   }
-  else if (WorkingURL.indexOf("***REMOVED***") != -1)
+  else if (WorkingURL.indexOf("#") != -1)
   {
-    Parts = WorkingURL.split("***REMOVED***");
+    Parts = WorkingURL.split("#");
     WorkingURL = Parts[0];
   }
 
@@ -980,14 +980,14 @@ function  WWHHelp_GetSyncPrevNext(ParamHREF)
 
   // Trim named anchor entries
   //
-  Parts = ParamHREF.split("***REMOVED***");
+  Parts = ParamHREF.split("#");
   AbsoluteHREF = Parts[0];
   VarAnchor = "";
   if (Parts.length > 1)
   {
     if (Parts[1].length > 0)
     {
-      VarAnchor = "***REMOVED***" + Parts[1];
+      VarAnchor = "#" + Parts[1];
     }
   }
 
@@ -1056,7 +1056,7 @@ function  WWHHelp_HREFToTitle(ParamHREF)
   {
     // Use basename for title
     //
-    Parts = ParamHREF.split("***REMOVED***");
+    Parts = ParamHREF.split("#");
     AbsoluteHREF = Parts[0];
     Parts = AbsoluteHREF.split("/");
     Title = Parts[Parts.length - 1];
@@ -1545,7 +1545,7 @@ function  WWHHelp_UpdateHash(ParamURL)
     {
       // Only update if different
       //
-      VarHash = "***REMOVED***href=" + VarFileName;
+      VarHash = "#href=" + VarFileName;
       if (this.fSingleTopic())
       {
         VarHash += "&single=true";

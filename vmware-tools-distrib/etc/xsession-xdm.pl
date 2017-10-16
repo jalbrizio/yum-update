@@ -1,42 +1,42 @@
-***REMOVED***!/usr/bin/perl -w
-***REMOVED***
-***REMOVED*** Copyright 2007-2013 VMware, Inc.  All rights reserved.
-***REMOVED***
+#!/usr/bin/perl -w
+#
+# Copyright 2007-2013 VMware, Inc.  All rights reserved.
+#
 
 use strict;
 
-***REMOVED***
-***REMOVED*** xsession-xdm.pl --
-***REMOVED***   Massage xrdb(1) output of xdm-config to help determine the location of
-***REMOVED***   the user's Xsession script.
-***REMOVED***
-***REMOVED*** First extract the display number from the user's DISPLAY environment
-***REMOVED*** variable.  Then examine input looking for either of the following:
-***REMOVED***   1.  Xsession script specific to this display.
-***REMOVED***   2.  Wildcard Xsession resource (applies to all displays).
-***REMOVED***
-***REMOVED*** If a display-specific resource was found, print its value.  Otherwise,
-***REMOVED*** if a generic resource was found, print its value.  If neither was found,
-***REMOVED*** there is no output.
-***REMOVED***
+#
+# xsession-xdm.pl --
+#   Massage xrdb(1) output of xdm-config to help determine the location of
+#   the user's Xsession script.
+#
+# First extract the display number from the user's DISPLAY environment
+# variable.  Then examine input looking for either of the following:
+#   1.  Xsession script specific to this display.
+#   2.  Wildcard Xsession resource (applies to all displays).
+#
+# If a display-specific resource was found, print its value.  Otherwise,
+# if a generic resource was found, print its value.  If neither was found,
+# there is no output.
+#
 
-my $sessionSpecific;    ***REMOVED*** Path to display-specific Xsession script.
-my $sessionDefault;     ***REMOVED*** Path to default Xsession script.
+my $sessionSpecific;    # Path to display-specific Xsession script.
+my $sessionDefault;     # Path to default Xsession script.
 
-my $display;    ***REMOVED*** Refers to user's display number.
-my $spattern;   ***REMOVED*** Pattern generated at run-time (based on $display) to match
-                ***REMOVED*** a display-specific DisplayManager*session line.
+my $display;    # Refers to user's display number.
+my $spattern;   # Pattern generated at run-time (based on $display) to match
+                # a display-specific DisplayManager*session line.
 
-***REMOVED*** The generic/default pattern.
+# The generic/default pattern.
 my $gpattern = '^[^!]*DisplayManager\.?\*\.?session';
 
 if (defined($ENV{'DISPLAY'}) && $ENV{'DISPLAY'} =~ /:([0-9]+)/) {
-   ***REMOVED*** Based on the well-formed $DISPLAY, build our display-specific session
-   ***REMOVED*** pattern thingy.
+   # Based on the well-formed $DISPLAY, build our display-specific session
+   # pattern thingy.
    $display = $1;
    $spattern = sprintf("^[^!]*DisplayManager._%d.session", $display);
 
-   ***REMOVED*** Okay, patterns have been built.  Let's get our search on.
+   # Okay, patterns have been built.  Let's get our search on.
    while (<STDIN>) {
       chomp($_);
 

@@ -1,31 +1,31 @@
-***REMOVED***!/bin/sh
-***REMOVED***
-***REMOVED*** Copyright 2005-2013 VMware, Inc.  All rights reserved.
-***REMOVED***
-***REMOVED*** Wrapper for the real 'vmware' binary. Ensure that the binary will find all
-***REMOVED*** the shared libraries it needs. If a shared library is not available from any
-***REMOVED*** of the standard system-wide locations, we provide it from the VMware package
-***REMOVED*** location. --hpreg
+#!/bin/sh
+#
+# Copyright 2005-2013 VMware, Inc.  All rights reserved.
+#
+# Wrapper for the real 'vmware' binary. Ensure that the binary will find all
+# the shared libraries it needs. If a shared library is not available from any
+# of the standard system-wide locations, we provide it from the VMware package
+# location. --hpreg
 
-***REMOVED*** BEGINNING_OF_DB_DOT_SH
-***REMOVED***!/bin/sh
+# BEGINNING_OF_DB_DOT_SH
+#!/bin/sh
 
-***REMOVED***
-***REMOVED*** Manage an installer database
-***REMOVED***
+#
+# Manage an installer database
+#
 
-***REMOVED*** Add an answer to a database in memory
+# Add an answer to a database in memory
 db_answer_add() {
-  local dbvar="$1" ***REMOVED*** IN/OUT
-  local id="$2"    ***REMOVED*** IN
-  local value="$3" ***REMOVED*** IN
+  local dbvar="$1" # IN/OUT
+  local id="$2"    # IN
+  local value="$3" # IN
   local answers
   local i
 
   eval "$dbvar"'_answer_'"$id"'="$value"'
 
   eval 'answers="$'"$dbvar"'_answers"'
-  ***REMOVED*** There is no double quote around $answers on purpose
+  # There is no double quote around $answers on purpose
   for i in $answers; do
     if [ "$i" = "$id" ]; then
       return
@@ -35,10 +35,10 @@ db_answer_add() {
   eval "$dbvar"'_answers="$answers"'
 }
 
-***REMOVED*** Remove an answer from a database in memory
+# Remove an answer from a database in memory
 db_answer_remove() {
-  local dbvar="$1" ***REMOVED*** IN/OUT
-  local id="$2"    ***REMOVED*** IN
+  local dbvar="$1" # IN/OUT
+  local id="$2"    # IN
   local new_answers
   local answers
   local i
@@ -47,7 +47,7 @@ db_answer_remove() {
 
   new_answers=''
   eval 'answers="$'"$dbvar"'_answers"'
-  ***REMOVED*** There is no double quote around $answers on purpose
+  # There is no double quote around $answers on purpose
   for i in $answers; do
     if [ "$i" != "$id" ]; then
       new_answers="$new_answers"' '"$i"
@@ -56,16 +56,16 @@ db_answer_remove() {
   eval "$dbvar"'_answers="$new_answers"'
 }
 
-***REMOVED*** Load all answers from a database on stdin to memory (<dbvar>_answer_*
-***REMOVED*** variables)
+# Load all answers from a database on stdin to memory (<dbvar>_answer_*
+# variables)
 db_load_from_stdin() {
-  local dbvar="$1" ***REMOVED*** OUT
+  local dbvar="$1" # OUT
 
   eval "$dbvar"'_answers=""'
 
-  ***REMOVED*** read doesn't support -r on FreeBSD 3.x. For this reason, the following line
-  ***REMOVED*** is patched to remove the -r in case of FreeBSD tools build. So don't make
-  ***REMOVED*** changes to it.
+  # read doesn't support -r on FreeBSD 3.x. For this reason, the following line
+  # is patched to remove the -r in case of FreeBSD tools build. So don't make
+  # changes to it.
   while read -r action p1 p2; do
     if [ "$action" = 'answer' ]; then
       db_answer_add "$dbvar" "$p1" "$p2"
@@ -75,43 +75,43 @@ db_load_from_stdin() {
   done
 }
 
-***REMOVED*** Load all answers from a database on disk to memory (<dbvar>_answer_*
-***REMOVED*** variables)
+# Load all answers from a database on disk to memory (<dbvar>_answer_*
+# variables)
 db_load() {
-  local dbvar="$1"  ***REMOVED*** OUT
-  local dbfile="$2" ***REMOVED*** IN
+  local dbvar="$1"  # OUT
+  local dbfile="$2" # IN
 
   db_load_from_stdin "$dbvar" < "$dbfile"
 }
 
-***REMOVED*** Iterate through all answers in a database in memory, calling <func> with
-***REMOVED*** id/value pairs and the remaining arguments to this function
+# Iterate through all answers in a database in memory, calling <func> with
+# id/value pairs and the remaining arguments to this function
 db_iterate() {
-  local dbvar="$1" ***REMOVED*** IN
-  local func="$2"  ***REMOVED*** IN
+  local dbvar="$1" # IN
+  local func="$2"  # IN
   shift 2
   local answers
   local i
   local value
 
   eval 'answers="$'"$dbvar"'_answers"'
-  ***REMOVED*** There is no double quote around $answers on purpose
+  # There is no double quote around $answers on purpose
   for i in $answers; do
     eval 'value="$'"$dbvar"'_answer_'"$i"'"'
     "$func" "$i" "$value" "$@"
   done
 }
 
-***REMOVED*** If it exists in memory, remove an answer from a database (disk and memory)
+# If it exists in memory, remove an answer from a database (disk and memory)
 db_remove_answer() {
-  local dbvar="$1"  ***REMOVED*** IN/OUT
-  local dbfile="$2" ***REMOVED*** IN
-  local id="$3"     ***REMOVED*** IN
+  local dbvar="$1"  # IN/OUT
+  local dbfile="$2" # IN
+  local id="$3"     # IN
   local answers
   local i
 
   eval 'answers="$'"$dbvar"'_answers"'
-  ***REMOVED*** There is no double quote around $answers on purpose
+  # There is no double quote around $answers on purpose
   for i in $answers; do
     if [ "$i" = "$id" ]; then
       echo 'remove_answer '"$id" >> "$dbfile"
@@ -121,25 +121,25 @@ db_remove_answer() {
   done
 }
 
-***REMOVED*** Add an answer to a database (disk and memory)
+# Add an answer to a database (disk and memory)
 db_add_answer() {
-  local dbvar="$1"  ***REMOVED*** IN/OUT
-  local dbfile="$2" ***REMOVED*** IN
-  local id="$3"     ***REMOVED*** IN
-  local value="$4"  ***REMOVED*** IN
+  local dbvar="$1"  # IN/OUT
+  local dbfile="$2" # IN
+  local id="$3"     # IN
+  local value="$4"  # IN
 
   db_remove_answer "$dbvar" "$dbfile" "$id"
   echo 'answer '"$id"' '"$value" >> "$dbfile"
   db_answer_add "$dbvar" "$id" "$value"
 }
 
-***REMOVED*** Add a file to a database on disk
-***REMOVED*** 'file' is the file to put in the database (it may not exist on the disk)
-***REMOVED*** 'tsfile' is the file to get the timestamp from, '' if no timestamp
+# Add a file to a database on disk
+# 'file' is the file to put in the database (it may not exist on the disk)
+# 'tsfile' is the file to get the timestamp from, '' if no timestamp
 db_add_file() {
-  local dbfile="$1" ***REMOVED*** IN
-  local file="$2"   ***REMOVED*** IN
-  local tsfile="$3" ***REMOVED*** IN
+  local dbfile="$1" # IN
+  local file="$2"   # IN
+  local tsfile="$3" # IN
   local date
 
   if [ "$tsfile" = '' ]; then
@@ -153,22 +153,22 @@ db_add_file() {
   fi
 }
 
-***REMOVED*** Remove file from database
+# Remove file from database
 db_remove_file() {
-  local dbfile="$1" ***REMOVED*** IN
-  local file="$2"   ***REMOVED*** IN
+  local dbfile="$1" # IN
+  local file="$2"   # IN
 
   echo "remove_file $file" >> "$dbfile"
 }
 
-***REMOVED*** Add a directory to a database on disk
+# Add a directory to a database on disk
 db_add_dir() {
-  local dbfile="$1" ***REMOVED*** IN
-  local dir="$2"    ***REMOVED*** IN
+  local dbfile="$1" # IN
+  local dir="$2"    # IN
 
   echo 'directory '"$dir" >> "$dbfile"
 }
-***REMOVED*** END_OF_DB_DOT_SH
+# END_OF_DB_DOT_SH
 
 db_load 'vm_db' '/etc/vmware-tools/locations'
 
@@ -179,10 +179,10 @@ vm_append_libs() {
    forced_libs='@@VMWARE_FORCED_LIBS@@'
 
    while read lib dummy status; do
-      ***REMOVED*** Use grep here since FreeBSD ldd output contains a trailing "(0x0)"
+      # Use grep here since FreeBSD ldd output contains a trailing "(0x0)"
       libFound=`echo "$status" | grep "$lib"`
 
-      ***REMOVED*** Now check to see if this is a forcefully loaded lib
+      # Now check to see if this is a forcefully loaded lib
       for testLib in $forced_libs; do
          if [ "$lib" = "$testLib" ]; then
             libFound=''
@@ -198,8 +198,8 @@ vm_append_libs() {
       fi
    done
 
-   ***REMOVED*** There are some cases where we need to forcefully append libs to LD_LIBRARY_PATH.
-   ***REMOVED*** Hence we take care of that here.
+   # There are some cases where we need to forcefully append libs to LD_LIBRARY_PATH.
+   # Hence we take care of that here.
    for lib in ; do
       libPath="$vm_db_answer_LIBDIR"'/lib32/'"$lib"
       if [ "$lib" != '' -a -r "$libPath/$lib" ]; then
@@ -219,7 +219,7 @@ tools_bin_path="$vm_db_answer_LIBDIR"'/sbin32'
 
 LD_LIBRARY_PATH=`LANGUAGE=C LANG=C ldd "$tools_bin_path/$binary" | vm_append_libs`
 
-***REMOVED*** Solaris places some needed libraries on a different path.
+# Solaris places some needed libraries on a different path.
 if [ `uname` = SunOS ]; then
    if [ `isainfo -b` = 32 ]; then
       LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/sfw/lib"
@@ -228,12 +228,12 @@ if [ `uname` = SunOS ]; then
    fi
 fi
 
-***REMOVED*** Instead of using absolute path for the binary change our PATH
-***REMOVED*** to keep argv[0] intact since it may be used for printing
-***REMOVED*** disagnostic messages
+# Instead of using absolute path for the binary change our PATH
+# to keep argv[0] intact since it may be used for printing
+# disagnostic messages
 PATH="$tools_bin_path:$PATH"
 
-***REMOVED*** The Bourne shell requires export to be its own statement
+# The Bourne shell requires export to be its own statement
 export PATH
 export LD_LIBRARY_PATH
 exec "$binary" "$@"

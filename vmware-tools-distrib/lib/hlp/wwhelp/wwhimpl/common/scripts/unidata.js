@@ -3,7 +3,7 @@
 
 // Derived from icu/source/data/unidata/DerivedCoreProperties.txt
 //
-// Editor: Visual Studio C***REMOVED*** Express 2005
+// Editor: Visual Studio C# Express 2005
 //
 //   ^{[0-9A-F][0-9A-F][0-9A-F][0-9A-F]}\.\.{[0-9A-F][0-9A-F][0-9A-F][0-9A-F]} +;.*$
 //     if (('\\u\1' <= c) && (c <= '\\u\2')) return true;

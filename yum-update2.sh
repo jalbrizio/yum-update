@@ -1,45 +1,45 @@
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
+#!/bin/bash
+# This script updates the server Via Yum
+# Then emails the Admins the status of the updates
+# Then reboots the server in that order
 
-***REMOVED***
+# Script written by Jeremi Albrizio on Feb 5th.
 
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
+# This is where we make sure it only runs on the second sunday 
+# since cron can only be scheduled to run every sunday.
+#
+#!/bin/bash
 
 
 
-***REMOVED*** This is where we call yum to update the server
-***REMOVED***
-***REMOVED***
+# This is where we call yum to update the server
+#
+yum -y update --nogpg --skip-broken > /var/log/yum-update.log
 
-***REMOVED*** now we Give it 30 seconds just in case 
-***REMOVED*** before emailing everyone the update status.
-***REMOVED***
-***REMOVED***
+# now we Give it 30 seconds just in case 
+# before emailing everyone the update status.
+#
+sleep 30
 
-***REMOVED*** Email everyone ***REMOVED******REMOVED*** email are seperated by comas with no spaces***REMOVED******REMOVED***
-***REMOVED***
-***REMOVED***
+# Email everyone ## email are seperated by comas with no spaces##
+#
+cat /var/log/yum-update.log | mail -s "yum update log for `date`" exampleemail@yourserver.com         # replace with 'examplePass' instead,exampleemail@yourserver.com         # replace with 'examplePass' instead,exampleemail@yourserver.com         # replace with 'examplePass' instead,exampleemail@yourserver.com         # replace with 'examplePass' instead
 
-***REMOVED*** Make sure iptables is running and will start at boot then ***REMOVED*** the server 
-***REMOVED*** Yes, I chose ***REMOVED*** instead of shutdown -r 0
-***REMOVED*** 
+# Make sure iptables is running and will start at boot then reboot the server 
+# Yes, I chose reboot instead of shutdown -r 0
+# 
 
-***REMOVED***
-***REMOVED***
+chkconfig iptables on
+service iptables restart
 
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
+service mysql start --wsrep-cluster-address=gcomm://
+mysql_upgrade -u root -pexamplePass         # replace with 'examplePass' instead --force
+cd /usr/local/src/vmware-tools/galera
+semodule -i /usr/local/src/vmware-tools/galera/galera.pp
 
-***REMOVED***
-***REMOVED***
-***REMOVED***
+service mysql stop
+killall -9 mysqld
+service mysql start
 
-***REMOVED***
+reboot
 

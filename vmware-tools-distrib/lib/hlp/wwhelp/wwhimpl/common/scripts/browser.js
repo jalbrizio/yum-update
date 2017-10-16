@@ -305,9 +305,9 @@ function  WWHBrowser_SetCookiePath(ParamURL)
     Parts = WorkingURL.split("?");
     WorkingURL = Parts[0];
   }
-  else if (WorkingURL.indexOf("***REMOVED***") != -1)
+  else if (WorkingURL.indexOf("#") != -1)
   {
-    Parts = WorkingURL.split("***REMOVED***");
+    Parts = WorkingURL.split("#");
     WorkingURL = Parts[0];
   }
 

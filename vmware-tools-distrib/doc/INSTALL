@@ -43,7 +43,7 @@ CONFIGURING
      vmware-config-tools.pl
 
   This will teach VMware Tools how to run on your current Linux kernel.
-  If you ***REMOVED*** your machine with a new kernel that VMware Tools
+  If you reboot your machine with a new kernel that VMware Tools
   doesn't know yet (because, let's say, you have upgraded your Linux system),
   you will have to run this configuration program again.
   Then, VMware Tools will know this new kernel once and for all.

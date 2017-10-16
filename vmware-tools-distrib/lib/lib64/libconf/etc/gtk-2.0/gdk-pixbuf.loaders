@@ -1,9 +1,9 @@
-***REMOVED*** GdkPixbuf Image Loader Modules file
-***REMOVED*** Automatically generated file, do not edit
-***REMOVED*** Created by gdk-pixbuf-query-loaders from gtk+-2.20.0
-***REMOVED***
-***REMOVED*** LoaderDir = @@LIBCONF_DIR@@/gtk-2.0/2.10.0/loaders
-***REMOVED***
+# GdkPixbuf Image Loader Modules file
+# Automatically generated file, do not edit
+# Created by gdk-pixbuf-query-loaders from gtk+-2.20.0
+#
+# LoaderDir = @@LIBCONF_DIR@@/gtk-2.0/2.10.0/loaders
+#
 "@@LIBCONF_DIR@@/gtk-2.0/2.10.0/loaders/libpixbufloader-ani.so"
 "ani" 4 "gtk20" "The ANI image format" "LGPL"
 "application/x-navi-animation" ""
@@ -100,7 +100,7 @@
 "xbm" 4 "gtk20" "The XBM image format" "LGPL"
 "image/x-xbitmap" ""
 "xbm" ""
-"***REMOVED***define " "" 100
+"#define " "" 100
 "/*" "" 50
 
 "@@LIBCONF_DIR@@/gtk-2.0/2.10.0/loaders/libpixbufloader-xpm.so"

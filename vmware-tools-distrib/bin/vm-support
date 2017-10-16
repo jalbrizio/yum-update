@@ -1,18 +1,18 @@
-***REMOVED***
-***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***
-***REMOVED*** Copyright 2006-2013 VMware, Inc.  All rights reserved. -- VMware Confidential
-***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***
-***REMOVED***
-***REMOVED***	VMware Linux Support Script
-***REMOVED***	Port from ESX server support script for collecting guest logs
-***REMOVED***
-***REMOVED***	Collects various configuration and log files
-***REMOVED***	for use when troubleshooting the Linux guests.
-***REMOVED***
+#!/bin/bash
+##########################################################################
+# Copyright 2006-2013 VMware, Inc.  All rights reserved. -- VMware Confidential
+##########################################################################
+#
+#	VMware Linux Support Script
+#	Port from ESX server support script for collecting guest logs
+#
+#	Collects various configuration and log files
+#	for use when troubleshooting the Linux guests.
+#
 
 
 
-***REMOVED***	Function: usage prints how to use this script
+#	Function: usage prints how to use this script
 
 function usage {
 	echo ""
@@ -26,8 +26,8 @@ TARFILE=vm-`date +%Y-%m-%d`.$$.tar
 VER=0.88
 OUTPUT_DIR=vm-support.$$
 
-***REMOVED***	Function: banner prints any number of strings padded with
-***REMOVED***	newlines before and after.
+#	Function: banner prints any number of strings padded with
+#	newlines before and after.
 
 function banner {
 	echo
@@ -38,26 +38,26 @@ function banner {
 	echo
 }
 
-***REMOVED***	The status constants are important and have to be kept
-***REMOVED***	in sync with VMware Workstation implementation
+#	The status constants are important and have to be kept
+#	in sync with VMware Workstation implementation
 
-***REMOVED***	vm-support script is not running
+#	vm-support script is not running
 VMSUPPORT_NOT_RUNNING=0
-***REMOVED***	vm-support script is beginning
+#	vm-support script is beginning
 VMSUPPORT_BEGINNING=1
-***REMOVED***	vm-support script running in progress
+#	vm-support script running in progress
 VMSUPPORT_RUNNING=2
-***REMOVED***	vm-support script is ending
+#	vm-support script is ending
 VMSUPPORT_ENDING=3
-***REMOVED***	vm-support script failed
+#	vm-support script failed
 VMSUPPORT_ERROR=10
-***REMOVED***	vm-support collection not supported
+#	vm-support collection not supported
 VMSUPPORT_UNKNOWN=100
 
-***REMOVED***internal state machine state for update
+#internal state machine state for update
 update=0
 
-***REMOVED***	Updates the VM with the current state
+#	Updates the VM with the current state
 
 function UpdateState {
    if [ $update -eq 1 ]; then
@@ -65,8 +65,8 @@ function UpdateState {
    fi
 }
 
-***REMOVED*** checkOutputDir(): checks for a self contained output
-***REMOVED*** directory for later tar'ing  and creates it if needed
+# checkOutputDir(): checks for a self contained output
+# directory for later tar'ing  and creates it if needed
 function checkOutputDir()
 {
    dir=$1
@@ -109,14 +109,14 @@ function UpdateSpinner {
         echo -en "\rPreparing Files: $SPINNER"
 }
 
-***REMOVED***	Function: addtar copies whatever files and directories you give it to
-***REMOVED***	a self contained output directory for later tar'ing
-***REMOVED***	Working on copies could slow this down with VERY large files but:
-***REMOVED***	1) We don't expect VERY large files
-***REMOVED***	2) Since /proc files can be copied this preserves the tree without
-***REMOVED***	   having to cat them all into a file.
-***REMOVED***	3) tar barfs on open files like logs if it changes while it's tar'ing.
-***REMOVED***          Copying file first makes sure tar doesn't complain
+#	Function: addtar copies whatever files and directories you give it to
+#	a self contained output directory for later tar'ing
+#	Working on copies could slow this down with VERY large files but:
+#	1) We don't expect VERY large files
+#	2) Since /proc files can be copied this preserves the tree without
+#	   having to cat them all into a file.
+#	3) tar barfs on open files like logs if it changes while it's tar'ing.
+#          Copying file first makes sure tar doesn't complain
 
 
 function addtar {
@@ -129,25 +129,25 @@ function addtar {
            return
         fi
 
-	***REMOVED*** Ignore stdout and handle errors.
+	# Ignore stdout and handle errors.
 	UpdateSpinner
 	cp -pr "$FILE" "${OUTPUT_DIR}$DIR" 2>/dev/null
 
-	***REMOVED*** We could have failed to copy for several reasons
-	***REMOVED*** If we path had a shell special character (* ? .)
-	***REMOVED*** or if the file is in /proc
+	# We could have failed to copy for several reasons
+	# If we path had a shell special character (* ? .)
+	# or if the file is in /proc
 	if [ $? != 0 ]; then
-		FILENAME=${FILE***REMOVED******REMOVED****/}
+		FILENAME=${FILE##*/}
 		for line in "$DIR"/$FILENAME
 		do
 			if [ -e "$line" ]; then
-				***REMOVED*** Ignore stdout and handle errors.
+				# Ignore stdout and handle errors.
 				UpdateSpinner
 				cp -pr "$line" "${OUTPUT_DIR}$DIR" 2>/dev/null
 
-				***REMOVED*** If a file from /proc does not copy,
-				***REMOVED*** ignore - they're funny.
-				***REMOVED*** Otherwise, exit for failed copy.
+				# If a file from /proc does not copy,
+				# ignore - they're funny.
+				# Otherwise, exit for failed copy.
 				if [ $? != 0 ]; then
 					echo "$line" | grep ^/proc > /dev/null
 
@@ -155,16 +155,16 @@ function addtar {
 						banner "Could not copy $line \
 							to the tar area."
 						return
-					fi	***REMOVED*** Not proc
-				fi ***REMOVED*** is it proc
-			fi ***REMOVED*** does file exist
+					fi	# Not proc
+				fi # is it proc
+			fi # does file exist
 
-		done ***REMOVED*** for each file in the list
-	fi ***REMOVED*** if copy failed
+		done # for each file in the list
+	fi # if copy failed
 
 }
 
-***REMOVED*** runcmd($cmd, $out): executes the command redirected to a file
+# runcmd($cmd, $out): executes the command redirected to a file
 function runcmd {
    dir=`dirname "$2"`
    checkOutputDir "$dir"
@@ -181,7 +181,7 @@ function runcmd {
    UpdateSpinner
 }
 
-***REMOVED*** Parse args
+# Parse args
 for option in $@
 do
         case $option in
@@ -197,57 +197,57 @@ do
         esac
 done
 
-***REMOVED***	Start message
+#	Start message
 
 UpdateState $VMSUPPORT_BEGINNING
 
 banner "VMware Linux Support Script $VER"
 
-***REMOVED***	Check for root privledge
+#	Check for root privledge
 
 if [ $(id -u) != "0" ]; then
         banner "You are not root, some system information can't be collected."
 fi
 
-***REMOVED*** Source /etc/profile.  If we can't find it, it's the users problem to get
-***REMOVED*** their paths straight.
+# Source /etc/profile.  If we can't find it, it's the users problem to get
+# their paths straight.
 
 if [ -f /etc/profile ]; then
 	. /etc/profile
 fi
 
-***REMOVED*** Protect against non-default values of $IFS (Not all scripts in /etc/profile.d/
-***REMOVED*** are good citizens).
+# Protect against non-default values of $IFS (Not all scripts in /etc/profile.d/
+# are good citizens).
 unset IFS
 
-***REMOVED*** Set umask to make diagnostic information unreadable to other users to avoid
-***REMOVED*** possible information leakage.
+# Set umask to make diagnostic information unreadable to other users to avoid
+# possible information leakage.
 umask 0077
 
-***REMOVED*** Clear up temporary files if the process is killed midway.
+# Clear up temporary files if the process is killed midway.
 trap "rm -rf ${OUTPUT_DIR}; exit 1" HUP INT QUIT TERM ABRT
 
-***REMOVED***	make a subdir to put all your files in.  die if it does not create
+#	make a subdir to put all your files in.  die if it does not create
 mkdir $OUTPUT_DIR
 
 if [ $? != 0 ]; then
 	banner "Could not create ./${OUTPUT_DIR}... Exiting..." \
-"Please cd to a directory to which you can write" ***REMOVED*** Thanks Adam!
+"Please cd to a directory to which you can write" # Thanks Adam!
 	exit
 fi
 
 
-***REMOVED***	Add system configuration and log files. Wildcards
-***REMOVED***	may be used.
+#	Add system configuration and log files. Wildcards
+#	may be used.
 
 
-***REMOVED*** Try to collect bootloader config.
+# Try to collect bootloader config.
 if [ -e /etc/lilo.conf ]; then
 	addtar "/etc/lilo.conf"
 fi
 
-***REMOVED*** And for grub we are not sure about the exact default location so collect them
-***REMOVED*** all.
+# And for grub we are not sure about the exact default location so collect them
+# all.
 if [ -e /boot/grub/grub.conf ]; then
 	addtar "/boot/grub/grub.conf"
 fi
@@ -268,7 +268,7 @@ addtar "/etc/ntp.conf"
 addtar "/etc/security/*"
 
 
-***REMOVED*** Add services
+# Add services
 addtar "/etc/services"
 
 addtar "/etc/vmware-tools/*"
@@ -277,16 +277,16 @@ addtar "/var/log/secure*"
 addtar "/var/log/messages*"
 addtar "/var/run/vmware-*"
 
-***REMOVED*** Add /proc with some exceptions.  stdout redirected to /dev/null.  Some files
-***REMOVED*** come and go and confuse find.  Just send whatever works and don't scare user.
+# Add /proc with some exceptions.  stdout redirected to /dev/null.  Some files
+# come and go and confuse find.  Just send whatever works and don't scare user.
 
 for procfile in `find /proc -type f 2>/dev/null| egrep -v kcore\|kmsg\|acpi\|pagemap\|/proc/$$`
 do
 	addtar "$procfile"
 done
 
-***REMOVED***	Commands to run ($1) and redirect to logs ($2) for
-***REMOVED***	inclusion.
+#	Commands to run ($1) and redirect to logs ($2) for
+#	inclusion.
 
 runcmd "echo vm-support version: $VER" "/tmp/vm-support-version.$$.txt"
 runcmd "lspci -H1 -M" "/tmp/lspci1.$$.txt"
@@ -311,7 +311,7 @@ runcmd "umask" "/tmp/umask.$$.txt"
 UpdateState $VMSUPPORT_RUNNING
 
 
-***REMOVED***	Perform the tar ('S' for sparse core files)
+#	Perform the tar ('S' for sparse core files)
 
 tar -czSvf $TARFILE $OUTPUT_DIR
 
@@ -327,7 +327,7 @@ if [ $? != 0 ]; then
         "binary is not in the path, or you are not in a virtual machine"
 fi
 
-***REMOVED***	Clean up temporary files
+#	Clean up temporary files
 rm -rf $OUTPUT_DIR
 
 if [ $? != 0 ]; then
@@ -336,4 +336,4 @@ fi
 
 UpdateState $VMSUPPORT_ENDING
 
-***REMOVED***	End
+#	End

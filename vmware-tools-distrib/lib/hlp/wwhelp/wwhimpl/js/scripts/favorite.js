@@ -120,7 +120,7 @@ function  WWHFavorites_NavigationBodyHTML()
     this.mHTMLSegment.fAppend("     <tr>\n");
     this.mHTMLSegment.fAppend("      <td width=\"100%\">\n");
     this.mHTMLSegment.fAppend("<div>");
-    this.mHTMLSegment.fAppend((this.mCurrent.mTitle.length > 0) ? this.mCurrent.mTitle : "&***REMOVED***160;");
+    this.mHTMLSegment.fAppend((this.mCurrent.mTitle.length > 0) ? this.mCurrent.mTitle : "&#160;");
     this.mHTMLSegment.fAppend("</div>");
     this.mHTMLSegment.fAppend("      </td>\n");
     this.mHTMLSegment.fAppend("     </tr>\n");

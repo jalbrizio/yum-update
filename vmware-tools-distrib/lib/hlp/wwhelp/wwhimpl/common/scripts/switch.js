@@ -81,10 +81,10 @@ function  WWHSwitch_ParseURLParameters(ParamURL)
     {
       Parts = ParamURL.split("?");
     }
-    else if (ParamURL.indexOf("***REMOVED***") != -1)
+    else if (ParamURL.indexOf("#") != -1)
     {
-      Parts = ParamURL.split("***REMOVED***");
-      Parameters = Parts.slice(1).join("***REMOVED***");
+      Parts = ParamURL.split("#");
+      Parameters = Parts.slice(1).join("#");
       Parts.length = 2;
       Parts[1] = Parameters;
     }
@@ -256,9 +256,9 @@ function  WWHSwitch_ProcessURL(ParamURL)
   }
   if (this.mParameters.length > 0)
   {
-    // Using a "***REMOVED*** to support bookmarks after the redirect
+    // Using a "# to support bookmarks after the redirect
     //
-    this.mParameters = "***REMOVED***" + this.mParameters;
+    this.mParameters = "#" + this.mParameters;
   }
 }
 

@@ -1,17 +1,17 @@
-***REMOVED*** VMware SVGA
+# VMware SVGA
 
 Section "Module"
-    Load        "dbe"  	***REMOVED*** Double buffer extension
+    Load        "dbe"  	# Double buffer extension
     SubSection  "extmod"
     EndSubSection
     Load        "type1"
     Load        "freetype"
-***REMOVED***    Load       "glx"
+#    Load       "glx"
 EndSection
 
 Section "Files"
     RgbPath	"/usr/X11R6/lib/X11/rgb"
-***REMOVED***    FontPath   "/usr/X11R6/lib/X11/fonts/local/"
+#    FontPath   "/usr/X11R6/lib/X11/fonts/local/"
     FontPath   "/usr/X11R6/lib/X11/fonts/misc/"
     FontPath   "/usr/X11R6/lib/X11/fonts/75dpi/:unscaled"
     FontPath   "/usr/X11R6/lib/X11/fonts/100dpi/:unscaled"
@@ -19,11 +19,11 @@ Section "Files"
     FontPath   "/usr/X11R6/lib/X11/fonts/Speedo/"
     FontPath   "/usr/X11R6/lib/X11/fonts/75dpi/"
     FontPath   "/usr/X11R6/lib/X11/fonts/100dpi/"
-***REMOVED***    ModulePath "/usr/X11R6/lib/modules"
+#    ModulePath "/usr/X11R6/lib/modules"
 EndSection
 
 Section "ServerFlags"
-***REMOVED***    Option NoTrapSignals
+#    Option NoTrapSignals
 EndSection
 
 Section "InputDevice"
@@ -42,9 +42,9 @@ Section "InputDevice"
     Option "Protocol"    "IMPS/2"
     Option "Device"      "/dev/mouse"
     Option "ZAxisMapping"	"4 5"
-***REMOVED***    Option "Emulate3Buttons"
-***REMOVED***    Option "Emulate3Timeout"    "50"
-***REMOVED***    Option "ChordMiddle"
+#    Option "Emulate3Buttons"
+#    Option "Emulate3Timeout"    "50"
+#    Option "ChordMiddle"
 EndSection
 
 Section "Monitor"
@@ -80,13 +80,13 @@ Section "Screen"
     Device      "VMware SVGA"
     Monitor     "vmware"
 
-    ***REMOVED*** Don't specify DefaultColorDepth unless you know what you're
-    ***REMOVED*** doing. It will override the driver's preferences which can
-    ***REMOVED*** cause the X server not to run if the host doesn't support the
-    ***REMOVED*** depth.
+    # Don't specify DefaultColorDepth unless you know what you're
+    # doing. It will override the driver's preferences which can
+    # cause the X server not to run if the host doesn't support the
+    # depth.
     
     Subsection "Display"
-        ***REMOVED*** VGA mode: better left untouched
+        # VGA mode: better left untouched
         Depth       4
         Modes       "640x480"
         ViewPort    0 0

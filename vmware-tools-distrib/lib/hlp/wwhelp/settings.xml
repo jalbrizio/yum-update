@@ -8,10 +8,10 @@
       <Indent value="17" />
       <Title>
         <Font style="font-family: Verdana, Arial, Helvetica, sans-serif ; font-size: 10pt" />
-        <Colors foreground="***REMOVED***FFFFFF" background="***REMOVED***999999" />
+        <Colors foreground="#FFFFFF" background="#999999" />
       </Title>
       <Font style="font-family: Verdana, Arial, Helvetica, sans-serif ; font-size: 8pt" />
-      <Colors foreground="***REMOVED***003399" background="***REMOVED***FFFFFF" border="***REMOVED***666666" />
+      <Colors foreground="#003399" background="#FFFFFF" border="#666666" />
     </SeeAlso>
     <NavigationBar>
       <SyncContents enable="true" />
@@ -20,14 +20,14 @@
       <RelatedTopics enableicon="false" enableinline="false">
         <Title>
           <Font style="font-family: Verdana, Arial, Helvetica, sans-serif ; font-size: 10pt" />
-          <Colors foreground="***REMOVED***FFFFFF" background="***REMOVED***999999" />
+          <Colors foreground="#FFFFFF" background="#999999" />
         </Title>
         <Inline>
           <Font style="font-family: Verdana, Arial, Helvetica, sans-serif ; font-size: 10pt" />
-          <Colors foreground="***REMOVED***003366" />
+          <Colors foreground="#003366" />
         </Inline>
         <Font style="font-family: Verdana, Arial, Helvetica, sans-serif ; font-size: 8pt" />
-        <Colors foreground="***REMOVED***003399" background="***REMOVED***FFFFFF" border="***REMOVED***666666" />
+        <Colors foreground="#003399" background="#FFFFFF" border="#666666" />
         <Size width="250" />
       </RelatedTopics>
       <Email enable="true" address="docfeedback@vmware.com" />
@@ -36,13 +36,13 @@
       <PDF enable="false" />
     </NavigationBar>
     <Tabs>
-      <DefaultColors foreground="***REMOVED***000000" />
-      <SelectedColors foreground="***REMOVED***000000" />
+      <DefaultColors foreground="#000000" />
+      <SelectedColors foreground="#000000" />
     </Tabs>
     <Panels>
       <HoverText enable="true">
         <Font style="font-family:Arial; font-size: 8pt; font-weight:bold " />
-        <Colors foreground="***REMOVED***000000" background="***REMOVED***FFFFFF" border="***REMOVED***b8b8b8" />
+        <Colors foreground="#000000" background="#FFFFFF" border="#b8b8b8" />
         <Size width="150" />
       </HoverText>
       <Contents enable="true" />
@@ -50,13 +50,13 @@
       <Search enable="true">
         <Results showrank="true" />
         <Highlighting enable="true">
-          <Colors foreground="***REMOVED***FFFFFF" background="***REMOVED***333399" />
+          <Colors foreground="#FFFFFF" background="#333399" />
         </Highlighting>
       </Search>
       <Favorites enable="true" />
     </Panels>
     <Popups>
-      <Colors foreground="***REMOVED***000000" background="***REMOVED***FFFFCC" border="***REMOVED***999999" />
+      <Colors foreground="#000000" background="#FFFFCC" border="#999999" />
       <Size width="200" />
     </Popups>
   </Common>
@@ -64,27 +64,27 @@
     <JavaScript>
       <Font style="font-family: Arial; font-size: 8pt" />
       <Indent value="17" />
-      <AnchorColors highlight="***REMOVED***CCCCCC" enabled="***REMOVED***315585" disabled="black" />
+      <AnchorColors highlight="#CCCCCC" enabled="#315585" disabled="black" />
       <Tabs>
         <Font style="font-family: Arial; font-size: 9pt ; font-weight: normal" />
       </Tabs>
       <Panels>
         <Contents>
           <Font style="font-family:Arial; font-size: 8pt; font-weight:bold " />
-          <Colors foreground="***REMOVED***000000" />
+          <Colors foreground="#000000" />
         </Contents>
         <Index>
           <Font style="font-family:Arial; font-size: 8pt; font-weight:bold " />
-          <Colors foreground="***REMOVED***000000" />
+          <Colors foreground="#000000" />
           <SectionNavigation threshold="1" separator=" - ">
             <Font style="font-family: Verdana, Arial, Helvetica, sans-serif ; font-size: 8pt ; font-weight: bold" />
             <CurrentColor value="black" />
-            <AnchorColors highlight="***REMOVED***CCCCCC" enabled="***REMOVED***315585" disabled="***REMOVED***999999" />
+            <AnchorColors highlight="#CCCCCC" enabled="#315585" disabled="#999999" />
           </SectionNavigation>
         </Index>
         <Search resultsbybook="true">
           <Font style="font-family:Arial; font-size: 8pt; font-weight:bold " />
-          <Colors foreground="***REMOVED***000000" />
+          <Colors foreground="#000000" />
         </Search>
         <Favorites>
           <Font style="font-family:Arial; font-size: 8pt; font-weight:bold " />

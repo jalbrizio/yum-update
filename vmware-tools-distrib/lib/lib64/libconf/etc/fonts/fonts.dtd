@@ -11,7 +11,7 @@
 <!-- 
     Add a directory that provides fonts
 -->
-<!ELEMENT dir (***REMOVED***PCDATA)>
+<!ELEMENT dir (#PCDATA)>
 <!ATTLIST dir xml:space (default|preserve) 'preserve'>
 
 <!--
@@ -20,7 +20,7 @@
     If the filename begins with '~', it is replaced with the users
     home directory path.
 -->
-<!ELEMENT cache (***REMOVED***PCDATA)>
+<!ELEMENT cache (#PCDATA)>
 <!ATTLIST cache xml:space (default|preserve) 'preserve'>
 
 <!--
@@ -32,7 +32,7 @@
     A leading '~' in a directory name is replaced with the users
     home directory path.
 -->
-<!ELEMENT cachedir (***REMOVED***PCDATA)>
+<!ELEMENT cachedir (#PCDATA)>
 <!ATTLIST cachedir xml:space (default|preserve) 'preserve'>
 
 <!--
@@ -45,7 +45,7 @@
     If the filename begins with '~', it is replaced with the users
     home directory path.
 -->
-<!ELEMENT include (***REMOVED***PCDATA)>
+<!ELEMENT include (#PCDATA)>
 <!ATTLIST include
 	  ignore_missing    (no|yes)		"no"
 	  xml:space	    (default|preserve)	"preserve">
@@ -103,7 +103,7 @@
 
 <!ELEMENT acceptfont (glob | pattern)*>
 
-<!ELEMENT glob (***REMOVED***PCDATA)>
+<!ELEMENT glob (#PCDATA)>
 
 <!ELEMENT pattern (patelt)*>
 
@@ -111,7 +111,7 @@
 
 <!ELEMENT patelt (%constant;)*>
 <!ATTLIST patelt
-	  name CDATA	***REMOVED***REQUIRED>
+	  name CDATA	#REQUIRED>
 
 <!ELEMENT alias (family*, prefer?, accept?, default?)>
 <!ATTLIST alias
@@ -119,7 +119,7 @@
 <!ELEMENT prefer (family)*>
 <!ELEMENT accept (family)*>
 <!ELEMENT default (family)*>
-<!ELEMENT family (***REMOVED***PCDATA)>
+<!ELEMENT family (#PCDATA)>
 <!ATTLIST family xml:space (default|preserve) 'preserve'>
 
 <!ENTITY % expr 'int|double|string|matrix|bool|charset
@@ -157,7 +157,7 @@
 <!ELEMENT test (%expr;)*>
 <!ATTLIST test 
 	  qual (any|all|first|not_first)    "any"
-	  name CDATA	    ***REMOVED***REQUIRED
+	  name CDATA	    #REQUIRED
 	  target (pattern|font|default)		"default"
 	  compare (eq|not_eq|less|less_eq|more|more_eq|contains|not_contains)	"eq">
 
@@ -181,26 +181,26 @@
 -->
 <!ELEMENT edit (%expr;)*>
 <!ATTLIST edit
-	  name CDATA	    ***REMOVED***REQUIRED
+	  name CDATA	    #REQUIRED
 	  mode (assign|assign_replace|prepend|append|prepend_first|append_last) "assign"
 	  binding (weak|strong|same) "weak">
 
 <!--
     Elements of expressions follow
 -->
-<!ELEMENT int (***REMOVED***PCDATA)>
+<!ELEMENT int (#PCDATA)>
 <!ATTLIST int xml:space (default|preserve) 'preserve'>
-<!ELEMENT double (***REMOVED***PCDATA)>
+<!ELEMENT double (#PCDATA)>
 <!ATTLIST double xml:space (default|preserve) 'preserve'>
-<!ELEMENT string (***REMOVED***PCDATA)>
+<!ELEMENT string (#PCDATA)>
 <!ATTLIST string xml:space (default|preserve) 'preserve'>
 <!ELEMENT matrix (double,double,double,double)>
-<!ELEMENT bool (***REMOVED***PCDATA)>
-<!ELEMENT charset (***REMOVED***PCDATA)>
+<!ELEMENT bool (#PCDATA)>
+<!ELEMENT charset (#PCDATA)>
 <!ATTLIST charset xml:space (default|preserve) 'preserve'>
-<!ELEMENT name (***REMOVED***PCDATA)>
+<!ELEMENT name (#PCDATA)>
 <!ATTLIST name xml:space (default|preserve) 'preserve'>
-<!ELEMENT const (***REMOVED***PCDATA)>
+<!ELEMENT const (#PCDATA)>
 <!ATTLIST const xml:space (default|preserve) 'preserve'>
 <!ELEMENT or (%expr;)*>
 <!ELEMENT and (%expr;)*>

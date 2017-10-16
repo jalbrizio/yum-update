@@ -654,7 +654,7 @@ function  WWHALinks_HTML(bParamReplace)
         // Get link info
         //
         VarLink = VarLinks[VarLinkIndex];
-        VarParts = VarLink.split("***REMOVED***");
+        VarParts = VarLink.split("#");
         VarLinkFileIndex = parseInt(VarParts[0]);
 
         // Emit link entry
@@ -714,7 +714,7 @@ function  WWHALinks_GotoALink(ParamBookIndex,
   //
   VarLinks = this.mALinks[ParamBookIndex];
   VarLink = VarLinks[ParamLinkIndex];
-  VarParts = VarLink.split("***REMOVED***");
+  VarParts = VarLink.split("#");
   VarLinkFileIndex = parseInt(VarParts[0]);
   VarLinkAnchor = null;
   if (VarParts.length > 1)

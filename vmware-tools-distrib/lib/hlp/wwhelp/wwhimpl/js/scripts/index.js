@@ -861,7 +861,7 @@ function  WWHIndex_SelectionListBodyHTML()
         {
           // Determine link file index and anchor
           //
-          Parts = LinkArray[LinkIndex].split("***REMOVED***");
+          Parts = LinkArray[LinkIndex].split("#");
           LinkFileIndex = parseInt(Parts[0]);
           LinkAnchor = null;
           if (Parts.length > 1)
@@ -1011,7 +1011,7 @@ function  WWHIndex_ClickedEntry(ParamEntryInfo)
 
     // Determine link file index and anchor
     //
-    Parts = Entry.mBookLinks[BookIndex][0].split("***REMOVED***");
+    Parts = Entry.mBookLinks[BookIndex][0].split("#");
     LinkFileIndex = parseInt(Parts[0]);
     LinkAnchor = null;
     if (Parts.length > 1)
@@ -1452,7 +1452,7 @@ function  WWHIndexEntry_SortChildren(ParamEntry)
   {
     // Sort array
     //
-    // vmware 0001460: FR: Index terms starting with "a" are collated under "ï¿½" 
+    // vmware 0001460: FR: Index terms starting with "a" are collated under "Æ" 
     // do not re-sort the array, rely on the sorting done by java when creating the list
     SortedArray = UnsortedArray;//.sort();
 

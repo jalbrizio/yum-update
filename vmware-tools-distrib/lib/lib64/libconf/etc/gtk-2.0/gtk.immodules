@@ -1,9 +1,9 @@
-***REMOVED*** GTK+ Input Method Modules file
-***REMOVED*** Automatically generated file, do not edit
-***REMOVED*** Created by gtk-query-immodules-2.0 from gtk+-2.20.0
-***REMOVED***
-***REMOVED*** ModulesPath = /mts/home1/arjain/.gtk-2.0/2.10.0/x86_64-redhat-linux-gnu/immodules:/mts/home1/arjain/.gtk-2.0/2.10.0/immodules:/mts/home1/arjain/.gtk-2.0/x86_64-redhat-linux-gnu/immodules:/mts/home1/arjain/.gtk-2.0/immodules:@@LIBCONF_DIR@@/gtk-2.0/2.10.0/x86_64-redhat-linux-gnu/immodules:@@LIBCONF_DIR@@/lib/gtk-2.0/2.10.0/immodules:/usr/lib/vmware/lib/gtk-2.0/x86_64-redhat-linux-gnu/immodules:/usr/lib/vmware/lib/gtk-2.0/immodules
-***REMOVED***
+# GTK+ Input Method Modules file
+# Automatically generated file, do not edit
+# Created by gtk-query-immodules-2.0 from gtk+-2.20.0
+#
+# ModulesPath = /mts/home1/arjain/.gtk-2.0/2.10.0/x86_64-redhat-linux-gnu/immodules:/mts/home1/arjain/.gtk-2.0/2.10.0/immodules:/mts/home1/arjain/.gtk-2.0/x86_64-redhat-linux-gnu/immodules:/mts/home1/arjain/.gtk-2.0/immodules:@@LIBCONF_DIR@@/gtk-2.0/2.10.0/x86_64-redhat-linux-gnu/immodules:@@LIBCONF_DIR@@/lib/gtk-2.0/2.10.0/immodules:/usr/lib/vmware/lib/gtk-2.0/x86_64-redhat-linux-gnu/immodules:/usr/lib/vmware/lib/gtk-2.0/immodules
+#
 "@@LIBCONF_DIR@@/gtk-2.0/2.10.0/immodules/im-am-et.so" 
 "am_et" "Amharic (EZ+)" "gtk20" "/usr/share/locale" "am" 
 

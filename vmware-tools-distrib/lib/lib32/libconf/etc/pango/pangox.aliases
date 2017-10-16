@@ -1,6 +1,6 @@
-***REMOVED*** File defining aliases of PangoFontDescription to X font set
-***REMOVED***
-***REMOVED*** family style variant weight stretch   XLFD
+# File defining aliases of PangoFontDescription to X font set
+#
+# family style variant weight stretch   XLFD
 
 sans normal normal normal normal \
   "-*-helvetica-medium-r-normal--*-*-*-*-*-*-*-*,\

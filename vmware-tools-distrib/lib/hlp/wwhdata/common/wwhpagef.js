@@ -192,7 +192,7 @@ function  WWHCheckHash()
       (WWHFrame.location.hash != WWHFrame.WWHHelp.mLastHash))
   {
     if ((WWHFrame.WWHHelp.mLastHash.indexOf("topic=") > 0) &&
-        (WWHFrame.location.hash.indexOf("***REMOVED***href=") == 0))
+        (WWHFrame.location.hash.indexOf("#href=") == 0))
     {
       // Context-sensitive link resolved
       // Update last hash and keep polling

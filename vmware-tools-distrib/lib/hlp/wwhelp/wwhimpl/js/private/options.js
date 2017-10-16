@@ -20,18 +20,18 @@ function  WWHJavaScriptSettings_HoverText_Object()
 
   this.mWidth = 150;
 
-  this.mForegroundColor = "***REMOVED***000000";
-  this.mBackgroundColor = "***REMOVED***FFFFFF";
-  this.mBorderColor     = "***REMOVED***b8b8b8";
+  this.mForegroundColor = "#000000";
+  this.mBackgroundColor = "#FFFFFF";
+  this.mBorderColor     = "#b8b8b8";
 }
 
 function  WWHJavaScriptSettings_Tabs_Object()
 {
   this.mFontStyle = "font-family: Arial; font-size: 9pt ; font-weight: normal";
 
-  this.mSelectedTabForegroundColor = "***REMOVED***000000";
+  this.mSelectedTabForegroundColor = "#000000";
 
-  this.mDefaultTabForegroundColor = "***REMOVED***000000";
+  this.mDefaultTabForegroundColor = "#000000";
 }
 
 function  WWHJavaScriptSettings_TOC_Object()
@@ -40,8 +40,8 @@ function  WWHJavaScriptSettings_TOC_Object()
 
   this.mFontStyle = "font-family:Arial; font-size: 8pt; font-weight:bold ";
 
-  this.mHighlightColor = "***REMOVED***CCCCCC";
-  this.mEnabledColor   = "***REMOVED***315585";
+  this.mHighlightColor = "#CCCCCC";
+  this.mEnabledColor   = "#315585";
   this.mDisabledColor  = "black";
 
   this.mIndent = 17;
@@ -53,17 +53,17 @@ function  WWHJavaScriptSettings_Index_Object()
 
   this.mFontStyle = "font-family:Arial; font-size: 8pt; font-weight:bold ";
 
-  this.mHighlightColor = "***REMOVED***CCCCCC";
-  this.mEnabledColor   = "***REMOVED***315585";
+  this.mHighlightColor = "#CCCCCC";
+  this.mEnabledColor   = "#315585";
   this.mDisabledColor  = "black";
 
   this.mIndent = 17;
 
   this.mNavigationFontStyle      = "font-family: Verdana, Arial, Helvetica, sans-serif ; font-size: 8pt ; font-weight: bold";
   this.mNavigationCurrentColor   = "black";
-  this.mNavigationHighlightColor = "***REMOVED***CCCCCC";
-  this.mNavigationEnabledColor   = "***REMOVED***315585";
-  this.mNavigationDisabledColor  = "***REMOVED***999999";
+  this.mNavigationHighlightColor = "#CCCCCC";
+  this.mNavigationEnabledColor   = "#315585";
+  this.mNavigationDisabledColor  = "#999999";
 }
 
 function  WWHJavaScriptSettings_Index_DisplayOptions(ParamIndexOptions)
@@ -78,8 +78,8 @@ function  WWHJavaScriptSettings_Search_Object()
 
   this.mFontStyle = "font-family:Arial; font-size: 8pt; font-weight:bold ";
 
-  this.mHighlightColor = "***REMOVED***CCCCCC";
-  this.mEnabledColor   = "***REMOVED***315585";
+  this.mHighlightColor = "#CCCCCC";
+  this.mEnabledColor   = "#315585";
   this.mDisabledColor  = "black";
 
   this.mbResultsByBook = true;
@@ -92,7 +92,7 @@ function  WWHJavaScriptSettings_Favorites_Object()
 
   this.mFontStyle = "font-family:Arial; font-size: 8pt; font-weight:bold ";
 
-  this.mHighlightColor = "***REMOVED***CCCCCC";
-  this.mEnabledColor   = "***REMOVED***315585";
+  this.mHighlightColor = "#CCCCCC";
+  this.mEnabledColor   = "#315585";
   this.mDisabledColor  = "black";
 }

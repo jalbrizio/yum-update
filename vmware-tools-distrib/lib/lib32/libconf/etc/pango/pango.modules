@@ -1,8 +1,8 @@
-***REMOVED*** Pango Modules file
-***REMOVED*** Automatically generated file, do not edit
-***REMOVED***
-***REMOVED*** ModulesPath = @@LIBCONF_DIR@@/pango/1.6.0/modules
-***REMOVED***
+# Pango Modules file
+# Automatically generated file, do not edit
+#
+# ModulesPath = @@LIBCONF_DIR@@/pango/1.6.0/modules
+#
 @@LIBCONF_DIR@@/pango/1.6.0/modules/pango-arabic-lang.so ArabicScriptEngineLang PangoEngineLang PangoRenderNone arabic:*
 @@LIBCONF_DIR@@/pango/1.6.0/modules/pango-arabic-fc.so ArabicScriptEngineFc PangoEngineShape PangoRenderFc arabic:* nko:*
 @@LIBCONF_DIR@@/pango/1.6.0/modules/pango-basic-fc.so BasicScriptEngineFc PangoEngineShape PangoRenderFc latin:* cyrillic:* greek:* armenian:* georgian:* runic:* ogham:* bopomofo:* cherokee:* coptic:* deseret:* ethiopic:* gothic:* han:* hiragana:* katakana:* old-italic:* canadian-aboriginal:* yi:* braille:* cypriot:* limbu:* osmanya:* shavian:* linear-b:* ugaritic:* glagolitic:* cuneiform:* phoenician:* common:

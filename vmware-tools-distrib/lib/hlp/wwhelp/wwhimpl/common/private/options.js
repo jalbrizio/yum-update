@@ -27,8 +27,8 @@ function  WWHCommonSettings_Object()
   this.mPopup         = new WWHCommonSettings_Popup_Object();
 
   this.mbHighlightingEnabled        = true;
-  this.mHighlightingForegroundColor = "***REMOVED***FFFFFF";
-  this.mHighlightingBackgroundColor = "***REMOVED***333399";
+  this.mHighlightingForegroundColor = "#FFFFFF";
+  this.mHighlightingBackgroundColor = "#333399";
 }
 
 function  WWHCommonSettings_RelatedTopics_Object()
@@ -36,17 +36,17 @@ function  WWHCommonSettings_RelatedTopics_Object()
   this.mWidth = 250;
 
   this.mTitleFontStyle       = "font-family: Verdana, Arial, Helvetica, sans-serif ; font-size: 10pt";
-  this.mTitleForegroundColor = "***REMOVED***FFFFFF";
-  this.mTitleBackgroundColor = "***REMOVED***999999";
+  this.mTitleForegroundColor = "#FFFFFF";
+  this.mTitleBackgroundColor = "#999999";
 
   this.mFontStyle       = "font-family: Verdana, Arial, Helvetica, sans-serif ; font-size: 8pt";
-  this.mForegroundColor = "***REMOVED***003399";
-  this.mBackgroundColor = "***REMOVED***FFFFFF";
-  this.mBorderColor     = "***REMOVED***666666";
+  this.mForegroundColor = "#003399";
+  this.mBackgroundColor = "#FFFFFF";
+  this.mBorderColor     = "#666666";
 
   this.mbInlineEnabled = false;
   this.mInlineFontStyle = "font-family: Verdana, Arial, Helvetica, sans-serif ; font-size: 10pt";
-  this.mInlineForegroundColor = "***REMOVED***003366";
+  this.mInlineForegroundColor = "#003366";
 }
 
 function  WWHCommonSettings_ALinks_Object()
@@ -57,19 +57,19 @@ function  WWHCommonSettings_ALinks_Object()
   this.mIndent = 17;
 
   this.mTitleFontStyle       = "font-family: Verdana, Arial, Helvetica, sans-serif ; font-size: 10pt";
-  this.mTitleForegroundColor = "***REMOVED***FFFFFF";
-  this.mTitleBackgroundColor = "***REMOVED***999999";
+  this.mTitleForegroundColor = "#FFFFFF";
+  this.mTitleBackgroundColor = "#999999";
 
   this.mFontStyle       = "font-family: Verdana, Arial, Helvetica, sans-serif ; font-size: 8pt";
-  this.mForegroundColor = "***REMOVED***003399";
-  this.mBackgroundColor = "***REMOVED***FFFFFF";
-  this.mBorderColor     = "***REMOVED***666666";
+  this.mForegroundColor = "#003399";
+  this.mBackgroundColor = "#FFFFFF";
+  this.mBorderColor     = "#666666";
 }
 
 function  WWHCommonSettings_Popup_Object()
 {
   this.mWidth = 200;
 
-  this.mBackgroundColor = "***REMOVED***FFFFCC";
-  this.mBorderColor     = "***REMOVED***999999";
+  this.mBackgroundColor = "#FFFFCC";
+  this.mBorderColor     = "#999999";
 }

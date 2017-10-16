@@ -17,16 +17,16 @@ require {
 	class tcp_socket name_bind;
 }
 
-***REMOVED***============= mysqld_safe_t ==============
+#============= mysqld_safe_t ==============
 allow mysqld_safe_t mysqld_t:process { siginh rlimitinh noatsecure };
 allow mysqld_safe_t security_t:file { read open };
 
-***REMOVED***============= mysqld_t ==============
+#============= mysqld_t ==============
 allow mysqld_t anon_inodefs_t:file { write getattr };
 allow mysqld_t apmd_var_run_t:sock_file getattr;
 allow mysqld_t kerberos_master_port_t:tcp_socket name_bind;
 
-***REMOVED***!!!! This avc can be allowed using the boolean 'allow_ypbind'
+#!!!! This avc can be allowed using the boolean 'allow_ypbind'
 allow mysqld_t port_t:tcp_socket name_bind;
 allow mysqld_t proc_net_t:file { read getattr open };
 allow mysqld_t rsync_exec_t:file { read getattr open execute execute_no_trans };
