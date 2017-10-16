@@ -23,7 +23,7 @@ sleep 30
 
 # Email everyone ## email are seperated by comas with no spaces##
 #
-cat /var/log/yum-update.log | mail -s "yum update log for `date`" exampleemail@yourserver.com         # replace with 'examplePass' instead,exampleemail@yourserver.com         # replace with 'examplePass' instead,exampleemail@yourserver.com         # replace with 'examplePass' instead,exampleemail@yourserver.com         # replace with 'examplePass' instead
+cat /var/log/yum-update.log | mail -s "yum update log for `date`" exampleemail@yourserver.com,exampleemail@yourserver.com,exampleemail@yourserver.com,exampleemail@yourserver.com
 
 # Make sure iptables is running and will start at boot then reboot the server 
 # Yes, I chose reboot instead of shutdown -r 0
