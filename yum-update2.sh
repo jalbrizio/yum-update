@@ -33,7 +33,7 @@ chkconfig iptables on
 service iptables restart
 
 service mysql start --wsrep-cluster-address=gcomm://
-mysql_upgrade -u root -pexamplePass         # replace with 'examplePass' instead --force
+mysql_upgrade -u root -pexamplePass --force
 cd /usr/local/src/vmware-tools/galera
 semodule -i /usr/local/src/vmware-tools/galera/galera.pp
 
